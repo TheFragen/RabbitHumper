@@ -36,16 +36,16 @@ public class ObjectiveSpawnerManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
 		if (Time.time >= startTime + spawnTimer) {
 			int index = Random.Range (0, spawnPoints.Count);
 
 			if (index != lastIndex && spaceOccupied[index] == false) {
-				GameObject newObj = Instantiate (objective, spawnPoints [index].transform.position, Quaternion.identity) as GameObject;
+				GameObject newObj = Instantiate (objective, spawnPoints [index].transform.position, objective.transform.rotation) as GameObject;
 				newObj.GetComponent<ObjectiveManager>().setIndex (index);
 				spaceOccupied [index] = true;
 				lastIndex = index;
 				startTime = Time.time;
+				spawnTimer = Random.Range (minTime, maxTime);
 			}
 		}
 	
