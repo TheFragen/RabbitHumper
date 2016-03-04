@@ -9,29 +9,35 @@ public class Ammo : MonoBehaviour {
 	private int index;
 
 
-	/***  TEST VARIABLES ***/
-	public float testTime = 10.0f;
-	private float testLifeTimer;
-
-
 	// Use this for initialization
 	void Start () {
-		testLifeTimer = Time.time;
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		gameObject.transform.Rotate (Vector3.up, worldRotationSpeed * Time.deltaTime, Space.World);
 		gameObject.transform.Rotate (Vector3.up, localRotationSpeed * Time.deltaTime, Space.Self);
-		if (Time.time >= testLifeTimer + testTime) {
-			AmmoSpawner.instance.setSpaceOccupied(index);
-			Destroy (gameObject);
-		}
-
 	}
 
 	public void setIndex(int i){
 		index = i;
+	}
+
+	void OnTriggerEnter(Collider other){
+		if(other.CompareTag("Player1")){
+			AmmoController.instance.addAmmo (0);
+			DestoryAmmo ();
+		}
+		else if(other.CompareTag("Player2")){
+			AmmoController.instance.addAmmo (1);
+			DestoryAmmo ();
+		}
+	}
+
+
+	void DestoryAmmo(){
+		AmmoSpawner.instance.setSpaceOccupied(index);
+		Destroy (gameObject);
 	}
 
 }
