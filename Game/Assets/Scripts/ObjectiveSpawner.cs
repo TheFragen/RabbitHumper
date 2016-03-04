@@ -2,8 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class ObjectiveSpawnerManager : MonoBehaviour {
-	public static ObjectiveSpawnerManager instance = null;
+public class ObjectiveSpawner : MonoBehaviour {
+	public static ObjectiveSpawner instance = null;
 
 	public GameObject objective;
 	public List<GameObject> spawnPoints = new List<GameObject>();
@@ -14,7 +14,7 @@ public class ObjectiveSpawnerManager : MonoBehaviour {
 	private float startTime;
 	private float spawnTimer;
 	private int lastIndex;
-	private bool[] spaceOccupied;
+	private bool objActive = false;
 
 	void Awake(){
 		//Makes the manager a singleton which persists through scenes
@@ -26,32 +26,34 @@ public class ObjectiveSpawnerManager : MonoBehaviour {
 		DontDestroyOnLoad (gameObject);
 	}
 
+
 	// Use this for initialization
 	void Start () {
 		startTime = Time.time;
 		spawnTimer = Random.Range (minTime, maxTime);
 		lastIndex = spawnPoints.Count + 1;
-		spaceOccupied = new bool[spawnPoints.Count];
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if (Time.time >= startTime + spawnTimer) {
-			int index = Random.Range (0, spawnPoints.Count);
 
-			if (index != lastIndex && spaceOccupied[index] == false) {
-				GameObject newObj = Instantiate (objective, spawnPoints [index].transform.position, objective.transform.rotation) as GameObject;
-				newObj.GetComponent<ObjectiveManager>().setIndex (index);
-				spaceOccupied [index] = true;
-				lastIndex = index;
-				startTime = Time.time;
-				spawnTimer = Random.Range (minTime, maxTime);
+		if (!objActive) {
+			if (Time.time >= startTime + spawnTimer) {
+				int index = Random.Range (0, spawnPoints.Count);
+
+				if (index != lastIndex) {
+					Instantiate (objective, spawnPoints [index].transform.position, objective.transform.rotation);
+					lastIndex = index;
+					objActive = true;
+				}
 			}
 		}
-	
 	}
 
-	public void setSpaceOccupied(int i){
-		spaceOccupied [i] = false;
+
+	public void setObjAct(){
+		objActive = false;
+		startTime = Time.time;
+		spawnTimer = Random.Range (minTime, maxTime);
 	}
 }

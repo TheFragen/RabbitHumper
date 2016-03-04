@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ObjectiveManager : MonoBehaviour {
+public class Ammo : MonoBehaviour {
 
 
 	public float angularSpeed = 20.0f;
@@ -22,7 +22,7 @@ public class ObjectiveManager : MonoBehaviour {
 	void Update () {
 		gameObject.transform.Rotate (Vector3.up, angularSpeed * Time.deltaTime, Space.World);
 		if (Time.time >= testLifeTimer + testTime) {
-			ObjectiveSpawnerManager.instance.setSpaceOccupied(index);
+			AmmoSpawner.instance.setSpaceOccupied(index);
 			Destroy (gameObject);
 		}
 
