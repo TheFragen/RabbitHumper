@@ -658,8 +658,8 @@ MonoBehaviour:
   - {fileID: 608156514}
   - {fileID: 375519756}
   - {fileID: 585626001}
-  minTime: 4
-  maxTime: 6
+  minTime: 2
+  maxTime: 4
 --- !u!4 &546270302
 Transform:
   m_ObjectHideFlags: 0
