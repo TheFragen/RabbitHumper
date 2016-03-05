@@ -33,7 +33,6 @@ public class Debug_ShootCarrot : MonoBehaviour {
             carrotRB.AddForce(shootDirection.normalized * projectileForce);
             spawnedCarrot.GetChild(0).GetComponent<BoxCollider>().enabled = true;
             spawnedCarrot.GetChild(0).GetComponent<CarrotMovement>().fireProjectile();
-            Physics.IgnoreCollision(spawnedCarrot.GetChild(0).GetComponent<Collider>(), GetComponent<Collider>());
             lastFireTime = currentTime + fireWaitTime * 1000;
 
         }

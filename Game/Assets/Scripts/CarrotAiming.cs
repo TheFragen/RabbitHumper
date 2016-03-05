@@ -24,6 +24,7 @@ public class CarrotAiming : MonoBehaviour {
         //Show carrot when player holds down R2
         if (Input.GetButtonDown("R2") && spawnedCarrot == null && currentTime > lastFireTime){
             spawnedCarrot = Instantiate(carrot, this.transform.position,Quaternion.Euler(new Vector3(10,0,0))) as Transform;
+            spawnedCarrot.GetChild(0).GetComponent<BoxCollider>().enabled = false;
             carrotRB = spawnedCarrot.GetComponent<Rigidbody>();
         }
         
