@@ -21,6 +21,9 @@ public class AmmoController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		ammoCount = new int[GameManger.instance.numbPlayers];
+		for (int i = 0; i < ammoCount.Length; i++) {
+			ammoCount [i] = 0;
+		}
 	}
 
 
@@ -36,5 +39,12 @@ public class AmmoController : MonoBehaviour {
 	 */
 	public void subAmmo(int index){
 		ammoCount [index-1]--;
+	}
+
+	/**
+	 * EXPECTS THE ACTUAL PLAYER NUMBER i.e. 1 FOR PLAYER 1, 2 FOR PLAYER 2 etc.
+	 */
+	public bool stillAmmo(int index){
+		return ammoCount [index - 1] != 0;
 	}
 }

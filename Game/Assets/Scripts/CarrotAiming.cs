@@ -10,76 +10,67 @@ public class CarrotAiming : MonoBehaviour {
     public float projectileForce;
     float lastFireTime = 0;
     public float fireWaitTime = 0;
-    public Vector3 topOffset;
+	private string playerString;
 
     // Use this for initialization
     void Start () {
-    }
+		playerString = GetComponent<PlayerMovement>().getPlayerNumb().ToString();
+	}
 	
 	// Update is called once per frame
 	void Update () {
-        float currentTime = Time.time * 1000;
+		if (AmmoController.instance.stillAmmo (GetComponent<PlayerMovement> ().getPlayerNumb())) {
+			float currentTime = Time.time * 1000;
 
-        Vector3 direction = Vector3.Normalize(new Vector3(0, -Input.GetAxis("Right_thumbY"), Input.GetAxis("Right_thumbX")));
+			Vector3 direction = Vector3.Normalize (new Vector3 (0, -Input.GetAxis ("RightJoystickY"+playerString), Input.GetAxis ("RightJoystickX"+playerString)));
 
-        //Show carrot when player holds down R2
-        if (Input.GetButtonDown("R2") && spawnedCarrot == null && currentTime > lastFireTime){
-            spawnedCarrot = Instantiate(carrot, this.transform.position + topOffset, Quaternion.Euler(new Vector3(10,0,0))) as Transform;
-            spawnedCarrot.GetChild(0).GetComponent<BoxCollider>().enabled = false;
-            carrotRB = spawnedCarrot.GetComponent<Rigidbody>();
-        }
+			//Show carrot when player holds down R2
+			if (Input.GetButtonDown ("RightTrigger"+playerString) && spawnedCarrot == null && currentTime > lastFireTime) {
+				spawnedCarrot = Instantiate (carrot, this.transform.position, Quaternion.Euler (new Vector3 (10, 0, 0))) as Transform;
+				carrotRB = spawnedCarrot.GetComponent<Rigidbody> ();
+			}
         
-        //"Animate" when the player rotates the right thumb stick
-        if(spawnedCarrot != null && Input.GetButton("R2"))
-        {
-            carrotRB.useGravity = false;
-            if (direction.magnitude == 0)
-            {
-                spawnedCarrot.position = this.transform.position + topOffset;
-                if(lastDirection.magnitude > 0)
-                {
-                    carrotRB.MoveRotation(Quaternion.LookRotation(lastDirection));
-                } else
-                {
-                    carrotRB.MoveRotation(Quaternion.Euler(0,0,0));
-                }
+			//"Animate" when the player rotates the right thumb stick
+			if (spawnedCarrot != null && Input.GetButton ("RightTrigger"+playerString)) {
+				carrotRB.useGravity = false;
+				if (direction.magnitude == 0) {
+					spawnedCarrot.position = this.transform.position;
+					if (lastDirection.magnitude > 0) {
+						carrotRB.MoveRotation (Quaternion.LookRotation (lastDirection));
+					} else {
+						carrotRB.MoveRotation (Quaternion.Euler (0, 0, 0));
+					}
 
-            } else
-            {
-                spawnedCarrot.position = this.transform.position + topOffset;
-                carrotRB.MoveRotation(Quaternion.LookRotation(direction));
-                lastDirection = direction;
-            }
-        }
+				} else {
+					spawnedCarrot.position = this.transform.position;
+					carrotRB.MoveRotation (Quaternion.LookRotation (direction));
+					lastDirection = direction;
+				}
+			}
 
-        //Fire the carrot
-        if (Input.GetButtonUp("R2") && spawnedCarrot != null)
-        {
-            Vector3 fireDirection = Vector3.Normalize(new Vector3(0, -Input.GetAxis("Right_thumbY"), Input.GetAxis("Right_thumbX")));
+			//Fire the carrot
+			if (Input.GetButtonUp ("RightTrigger"+playerString) && spawnedCarrot != null) {
+				Vector3 fireDirection = Vector3.Normalize (new Vector3 (0, -Input.GetAxis ("RightJoystickY"+playerString), Input.GetAxis ("RightJoystickX"+playerString)));
 
-            if(fireDirection != Vector3.zero)
-            {
-                lastFireTime = currentTime + fireWaitTime * 1000;
-                carrotRB.MoveRotation(Quaternion.LookRotation(fireDirection));
-                carrotRB.useGravity = true;
-                carrotRB.centerOfMass = new Vector3(10f, 10f, 10f);
-                carrotRB.AddForce(fireDirection.normalized * projectileForce);
-                spawnedCarrot.GetChild(0).GetComponent<BoxCollider>().enabled = true;
-                spawnedCarrot.GetChild(0).GetComponent<CarrotMovement>().fireProjectile();
-                Physics.IgnoreCollision(spawnedCarrot.GetChild(0).GetComponent<Collider>(), GetComponent<Collider>());
+				if (fireDirection != Vector3.zero) {
+					lastFireTime = currentTime + fireWaitTime * 1000;
+					carrotRB.MoveRotation (Quaternion.LookRotation (fireDirection));
+					carrotRB.useGravity = true;
+					carrotRB.centerOfMass = new Vector3 (10f, 10f, 10f);
+					carrotRB.AddForce (fireDirection.normalized * projectileForce);
+					spawnedCarrot.GetChild (0).GetComponent<BoxCollider> ().enabled = true;
+					spawnedCarrot.GetChild (0).GetComponent<CarrotMovement> ().fireProjectile ();
+					Physics.IgnoreCollision (spawnedCarrot.GetChild (0).GetComponent<Collider> (), GetComponent<Collider> ());
 
-                //Play carrot shoot sound
-                this.GetComponent<PlayerAudioHandler>().playCarrotShoot();
-
-                //spawnedCarrot.transform.rotation = Quaternion.LookRotation(direction);                
-                spawnedCarrot = null;
-            } else
-            {
-                Destroy(spawnedCarrot.gameObject);
-                spawnedCarrot = null;
-            }
+					//spawnedCarrot.transform.rotation = Quaternion.LookRotation(direction);                
+					spawnedCarrot = null;
+				} else {
+					Destroy (spawnedCarrot.gameObject);
+					spawnedCarrot = null;
+				}
             
-        }
+			}
+		}
 	}
     
 }

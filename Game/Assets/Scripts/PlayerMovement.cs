@@ -2,7 +2,10 @@
 using System.Collections;
 
 [RequireComponent(typeof(Rigidbody))]
-public class PlayerMovement : MonoBehaviour {
+public class PlayerMovement : MonoBehaviour
+{
+    private int playerNumber;
+    private string playerString;
     public float acceleration = 10;
     public float jumpSpeed = 10;
     public float maxVelocity;
@@ -14,10 +17,12 @@ public class PlayerMovement : MonoBehaviour {
     bool isStandingOnBullet = false;
 
     // Use this for initialization
-    void Start () {
-        
+    void Start()
+    {
+        playerString = playerNumber.ToString();
+
         rb = this.GetComponent<Rigidbody>();
-        
+
         distToGround = this.GetComponent<Collider>().bounds.extents.y;
     }
 
@@ -54,13 +59,14 @@ public class PlayerMovement : MonoBehaviour {
     {
         isStandingOnBullet = false;
     }
-    
+
     void FixedUpdate()
     {
         //Accelereation
-        if (Input.GetAxis("Horizontal") != 0)
+        if (Input.GetAxis("LeftJoystickX"+playerString) != 0)
         {
-            moveDir = new Vector3(0, 0, Input.GetAxis("Horizontal"));
+            Debug.Log(("LeftJoystickX" + playerString));
+            moveDir = new Vector3(0, 0, Input.GetAxis("LeftJoystickX" + playerString));
             if (Mathf.Abs(rb.velocity.z) <= maxVelocity)
             {
                 this.GetComponent<PlayerAudioHandler>().playRunning();
@@ -73,8 +79,9 @@ public class PlayerMovement : MonoBehaviour {
                     transform.rotation = Quaternion.LookRotation(new Vector3(0, 0, rb.velocity.normalized.z));
                 }
             }
-        //Deacceleration
-        } else if (!isJumping)
+            //Deacceleration
+        }
+        else if (!isJumping)
         {
             anim.SetBool("isRunning", true);
             anim.SetFloat("runSpeed", 1f);
@@ -82,7 +89,7 @@ public class PlayerMovement : MonoBehaviour {
         }
 
         //No animation if no movement
-        if(rb.velocity.sqrMagnitude < 0.2f)
+        if (rb.velocity.sqrMagnitude < 0.2f)
         {
             anim.Play("Standing");
             anim.SetBool("isRunning", false);
@@ -103,8 +110,9 @@ public class PlayerMovement : MonoBehaviour {
         }
 
         //Jumping
-        if (Input.GetButton("Fire2") && !isStandingOnBullet && !isJumping)
+        if (Input.GetButton("X"+playerString) && !isStandingOnBullet && !isJumping)
         {
+            Debug.Log(("X" + playerString));
             //Fix velocity so player can't mega jump on carrot
             rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
 
@@ -112,4 +120,14 @@ public class PlayerMovement : MonoBehaviour {
             rb.AddForce(new Vector3(0, 100, 0) * jumpSpeed);
         }
     }
+
+    public int getPlayerNumb()
+    {
+        return playerNumber;
+    }
+    public void setPlayerNumb(int i)
+    {
+        playerNumber = i;
+    }
+
 }
