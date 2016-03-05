@@ -10,10 +10,11 @@ public class CarrotAiming : MonoBehaviour {
     public float projectileForce;
     float lastFireTime = 0;
     public float fireWaitTime = 0;
+    public Vector3 topOffset;
 
     // Use this for initialization
     void Start () {
-	}
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -23,7 +24,7 @@ public class CarrotAiming : MonoBehaviour {
 
         //Show carrot when player holds down R2
         if (Input.GetButtonDown("R2") && spawnedCarrot == null && currentTime > lastFireTime){
-            spawnedCarrot = Instantiate(carrot, this.transform.position,Quaternion.Euler(new Vector3(10,0,0))) as Transform;
+            spawnedCarrot = Instantiate(carrot, this.transform.position + topOffset, Quaternion.Euler(new Vector3(10,0,0))) as Transform;
             spawnedCarrot.GetChild(0).GetComponent<BoxCollider>().enabled = false;
             carrotRB = spawnedCarrot.GetComponent<Rigidbody>();
         }
@@ -34,7 +35,7 @@ public class CarrotAiming : MonoBehaviour {
             carrotRB.useGravity = false;
             if (direction.magnitude == 0)
             {
-                spawnedCarrot.position = this.transform.position;
+                spawnedCarrot.position = this.transform.position + topOffset;
                 if(lastDirection.magnitude > 0)
                 {
                     carrotRB.MoveRotation(Quaternion.LookRotation(lastDirection));
@@ -45,7 +46,7 @@ public class CarrotAiming : MonoBehaviour {
 
             } else
             {
-                spawnedCarrot.position = this.transform.position;
+                spawnedCarrot.position = this.transform.position + topOffset;
                 carrotRB.MoveRotation(Quaternion.LookRotation(direction));
                 lastDirection = direction;
             }
@@ -66,6 +67,9 @@ public class CarrotAiming : MonoBehaviour {
                 spawnedCarrot.GetChild(0).GetComponent<BoxCollider>().enabled = true;
                 spawnedCarrot.GetChild(0).GetComponent<CarrotMovement>().fireProjectile();
                 Physics.IgnoreCollision(spawnedCarrot.GetChild(0).GetComponent<Collider>(), GetComponent<Collider>());
+
+                //Play carrot shoot sound
+                this.GetComponent<PlayerAudioHandler>().playCarrotShoot();
 
                 //spawnedCarrot.transform.rotation = Quaternion.LookRotation(direction);                
                 spawnedCarrot = null;
