@@ -10,6 +10,11 @@ public class CarrotMovement : MonoBehaviour {
     Transform parentTransform;
     public List<Vector3> thisVelocity;
 
+	private float despawnTimer;
+	public float duration = 5.0f;
+	private bool onGround = false;
+		
+
     // Use this for initialization
     void Start () {
         parentTransform = this.transform.parent;
@@ -28,6 +33,11 @@ public class CarrotMovement : MonoBehaviour {
             _tmp.x = 0.08f;
             parentTransform.position = _tmp;
         }
+		if (onGround) {
+			if (Time.time >= despawnTimer + duration) {
+				Destroy (parentTransform.gameObject);
+			}
+		}
     }
 
     void OnTriggerEnter(Collider other)
@@ -40,6 +50,10 @@ public class CarrotMovement : MonoBehaviour {
                 parentTransform.GetComponent<Rigidbody>().isKinematic = true;
                 isFired = false;
             }
+			if (!onGround) {
+				despawnTimer = Time.time;
+				onGround = true;
+			}
         }
         if(other.tag == "Bullet")
         {

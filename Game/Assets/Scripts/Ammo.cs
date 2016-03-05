@@ -10,19 +10,27 @@ public class Ammo : MonoBehaviour {
 	public float bounceClamp = 0.2f;
 	private float accu = 0.0f;
 	private int index;
+	private float startTime;
+	public float duration = 8.0f;
 
 	void Start(){
+		startTime = Time.time;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		gameObject.transform.Rotate (Vector3.up, worldRotationSpeed * Time.deltaTime, Space.World);
+		if (Time.time >= startTime + duration) {
+			DestroyAmmo ();
+		} 
+		else {
+			gameObject.transform.Rotate (Vector3.up, worldRotationSpeed * Time.deltaTime, Space.World);
 
-		if (Mathf.Abs(accu) >= bounceClamp) {
-			bounce *= -1.0f;
+			if (Mathf.Abs (accu) >= bounceClamp) {
+				bounce *= -1.0f;
+			}
+			gameObject.transform.position = new Vector3 (gameObject.transform.position.x, gameObject.transform.position.y + bounce, gameObject.transform.position.z);
+			accu += bounce;
 		}
-		gameObject.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + bounce, gameObject.transform.position.z);
-		accu += bounce;
 	}
 
 	public void setIndex(int i){
@@ -32,16 +40,16 @@ public class Ammo : MonoBehaviour {
 	void OnTriggerEnter(Collider other){
 		if(other.CompareTag("Player1")){
 			AmmoController.instance.addAmmo (1);
-			DestoryAmmo ();
+			DestroyAmmo ();
 		}
 		else if(other.CompareTag("Player2")){
 			AmmoController.instance.addAmmo (2);
-			DestoryAmmo ();
+			DestroyAmmo ();
 		}
 	}
 
 
-	void DestoryAmmo(){
+	void DestroyAmmo(){
 		AmmoSpawner.instance.setSpaceOccupied(index);
 		Destroy (gameObject);
 	}
