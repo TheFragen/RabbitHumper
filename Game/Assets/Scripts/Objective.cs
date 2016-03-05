@@ -28,20 +28,18 @@ public class Objective : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (player1Active && Input.GetButton ("Fire3") && !objActive) {
+		if (!objActive) {
+			if (player1Active && Input.GetButton ("Fire3")) {
+				player1Using = true;
+			} else if (player2Active && Input.GetButton ("Fire3")) {
+				player2Using = true;
+			} 
 			objActive = true;
-			player1Using = true;
 			startTimer = Time.time;
 			kidTimer = startTimer + durationPerKid;
-		} 
-		else if (player2Active && Input.GetButton ("Fire3") && !objActive) {
-			objActive = true;
-			player2Using = true;
-			startTimer = Time.time;
-			kidTimer = startTimer + durationPerKid;
-		} 
+		}
 
-		if (objActive) {
+		else if (objActive) {
 			float curTime = Time.time;
 
 			if (player1Using && Input.GetButton ("Fire3")) {
