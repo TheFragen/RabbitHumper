@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 public class CarrotMovement : MonoBehaviour {
     public float smallAngle = 10;
+	public float knockback = 50.0f;
     bool isFired = false;
     Transform spawnPoint;
     Transform parentTransform;
@@ -60,6 +61,31 @@ public class CarrotMovement : MonoBehaviour {
                 }
             }
         }
+		if (other.tag == "Player1" || other.tag == "Player2") {
+			Rigidbody otherRB = other.transform.GetComponent<Rigidbody>();
+			Rigidbody thisRB = parentTransform.GetComponent<Rigidbody>();
+
+			Vector3 dir = thisRB.velocity.normalized;
+			Vector3 knockbackDir = Vector3.zero;
+
+			if (other.GetComponent<PlayerMovement> ().isJumping) {
+				if (dir.y > 0.0f) {
+					knockbackDir += Vector3.up;
+				}
+				if (dir.y < 0.0f) {
+					knockbackDir += Vector3.down;
+				}
+			}
+			if (dir.z > 0.0f) {
+				knockbackDir += Vector3.forward;
+			}
+			if (dir.z < 0.0f) {
+				knockbackDir += Vector3.back;
+			}
+
+			otherRB.AddForce (knockbackDir * knockback);
+
+		}
         
     }
 

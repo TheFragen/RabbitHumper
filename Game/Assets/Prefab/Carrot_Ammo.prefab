@@ -431,6 +431,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   smallAngle: 10
+  knockback: 50
   thisVelocity: []
 --- !u!114 &11477442
 MonoBehaviour:
@@ -445,7 +446,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   worldRotationSpeed: 20
   localRotationSpeed: 10
-  bounce: 0.0005
+  bounce: 0.001
   bounceClamp: 0.2
 --- !u!1001 &100100000
 Prefab:

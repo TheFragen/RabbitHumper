@@ -3,7 +3,7 @@ using System.Collections;
 
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerMovement : MonoBehaviour {
-	public int playerNumber;
+	public int playerNumber = 1;
 	private string playerString;
     public float acceleration = 10;
     public float jumpSpeed = 10;
@@ -15,6 +15,7 @@ public class PlayerMovement : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		playerNumber = 1;
 		playerString = playerNumber.ToString ();
         rb = this.GetComponent<Rigidbody>();
 
