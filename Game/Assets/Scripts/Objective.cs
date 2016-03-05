@@ -28,16 +28,6 @@ public class Objective : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (Input.GetButton ("Fire1")) { //A on x-box controller
-			Debug.Log ("Fire1");
-		}
-		if (Input.GetButton ("Fire2")) { //B on x-box controller
-			Debug.Log ("Fire2");
-		}
-		if (Input.GetButton ("Fire3")) { // X on x-box controller
-			Debug.Log ("Fire3");
-		}
-	
 		if (player1Active && Input.GetButton ("Fire3") && !objActive) {
 			objActive = true;
 			player1Using = true;
@@ -82,6 +72,14 @@ public class Objective : MonoBehaviour {
 
 
 	void spawnKid(GameObject player){
+		int playerNumb = -1;
+		if(player.CompareTag("Player1")){
+			playerNumb = 1;
+		}
+		else if(player.CompareTag("Player1")){
+			playerNumb = 2;
+		}
+		GameManger.instance.addScore(playerNumb);
 		kidTimer += durationPerKid;
 		GameObject newKid = Instantiate (kid, gameObject.transform.position, Quaternion.identity) as GameObject;
 		newKid.GetComponent<Kid> ().setColor (player.GetComponent<MeshRenderer> ().material.color);
@@ -108,8 +106,6 @@ public class Objective : MonoBehaviour {
 			player2Using = false;
 		}
 	}
-
-
 
 	void DestroyObjective(){
 		objActive = false;

@@ -3,9 +3,9 @@ using System.Collections;
 
 public class Kid : MonoBehaviour {
 	private Vector3 jumpDir;
-	public float maxJumpForce = 1.0f;
-	public float minJumpForce = 1.0f;
-	public float jumpTimer = 1.5f;
+	public float maxJumpForce = 100.0f;
+	public float minJumpForce = 200.0f;
+	public float jumpTimer = 1.0f;
 
 	private float startTime;
 	private float distToGround;
@@ -19,8 +19,6 @@ public class Kid : MonoBehaviour {
 	
 	// Update is called once per frame
 	void FixedUpdate () {
-		
-
 		if (isGrounded ()) {
 			if (Time.time >= startTime + jumpTimer) {
 				jump ();

@@ -40,8 +40,8 @@ public class AmmoSpawner : MonoBehaviour {
 			int index = Random.Range (0, spawnPoints.Count);
 
 			if (index != lastIndex && spaceOccupied[index] == false) {
-				GameObject newObj = Instantiate (ammo, spawnPoints [index].transform.position, ammo.transform.rotation) as GameObject;
-				newObj.GetComponent<Ammo>().setIndex (index);
+				GameObject newAmmo = Instantiate (ammo, spawnPoints [index].transform.position, ammo.transform.rotation) as GameObject;
+				newAmmo.GetComponent<Ammo>().setIndex (index);
 				spaceOccupied [index] = true;
 				lastIndex = index;
 				startTime = Time.time;

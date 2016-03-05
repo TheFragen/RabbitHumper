@@ -39,17 +39,20 @@ public class ObjectiveSpawner : MonoBehaviour {
 
 		if (!objActive) {
 			if (Time.time >= startTime + spawnTimer) {
-				int index = Random.Range (0, spawnPoints.Count);
-
-				if (index != lastIndex) {
-					Instantiate (objective, spawnPoints [index].transform.position, objective.transform.rotation);
-					lastIndex = index;
-					objActive = true;
-				}
+				spawnObj ();
 			}
 		}
 	}
 
+	void spawnObj(){
+		int index = Random.Range (0, spawnPoints.Count);
+
+		if (index != lastIndex) {
+			Instantiate (objective, spawnPoints [index].transform.position, objective.transform.rotation);
+			lastIndex = index;
+			objActive = true;
+		}
+	}
 
 	public void setObjAct(){
 		objActive = false;

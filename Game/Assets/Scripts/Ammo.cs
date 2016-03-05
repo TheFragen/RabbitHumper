@@ -7,11 +7,6 @@ public class Ammo : MonoBehaviour {
 	public float worldRotationSpeed = 20.0f;
 	public float localRotationSpeed = 10.0f;
 	private int index;
-
-
-	// Use this for initialization
-	void Start () {
-	}
 	
 	// Update is called once per frame
 	void Update () {

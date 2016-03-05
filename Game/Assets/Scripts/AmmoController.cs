@@ -5,7 +5,6 @@ using System.Collections.Generic;
 public class AmmoController : MonoBehaviour {
 	public static AmmoController instance = null;
 
-	public int NoPlayers = 2;
 
 	private int[] ammoCount;
 
@@ -21,13 +20,9 @@ public class AmmoController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		ammoCount = new int[NoPlayers];
+		ammoCount = new int[GameManger.instance.numbPlayers];
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+
 
 	/**
 	 * EXPECTS THE ACTUAL PLAYER NUMBER i.e. 1 FOR PLAYER 1, 2 FOR PLAYER 2 etc.
