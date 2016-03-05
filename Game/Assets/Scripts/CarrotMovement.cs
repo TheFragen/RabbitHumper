@@ -13,6 +13,7 @@ public class CarrotMovement : MonoBehaviour {
 	private float despawnTimer;
 	public float duration = 5.0f;
 	private bool onGround = false;
+	private bool shaken = false;
 		
 
     // Use this for initialization
@@ -98,6 +99,10 @@ public class CarrotMovement : MonoBehaviour {
 			}
 
 			otherRB.AddForce (knockbackDir * knockback);
+			if (!shaken) {
+				Camera.main.GetComponent<CamShaking> ().cameraShake ();
+				shaken = true;
+			}
 
 		}
         
@@ -119,4 +124,4 @@ public class CarrotMovement : MonoBehaviour {
         isFired = true;
         this.spawnPoint = this.transform;
     }
-}
+		}
