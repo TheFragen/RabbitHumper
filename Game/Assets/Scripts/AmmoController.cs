@@ -29,10 +29,16 @@ public class AmmoController : MonoBehaviour {
 	
 	}
 
+	/**
+	 * EXPECTS THE ACTUAL PLAYER NUMBER i.e. 1 FOR PLAYER 1, 2 FOR PLAYER 2 etc.
+	 */
 	public void addAmmo(int index){
 		ammoCount [index-1]++;
 	}
 
+	/**
+	 * EXPECTS THE ACTUAL PLAYER NUMBER i.e. 1 FOR PLAYER 1, 2 FOR PLAYER 2 etc.
+	 */
 	public void subAmmo(int index){
 		ammoCount [index-1]--;
 	}

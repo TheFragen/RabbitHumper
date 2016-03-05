@@ -25,11 +25,11 @@ public class Ammo : MonoBehaviour {
 
 	void OnTriggerEnter(Collider other){
 		if(other.CompareTag("Player1")){
-			AmmoController.instance.addAmmo (0);
+			AmmoController.instance.addAmmo (1);
 			DestoryAmmo ();
 		}
 		else if(other.CompareTag("Player2")){
-			AmmoController.instance.addAmmo (1);
+			AmmoController.instance.addAmmo (2);
 			DestoryAmmo ();
 		}
 	}
