@@ -3,6 +3,8 @@ using System.Collections;
 
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerMovement : MonoBehaviour {
+	public int playerNumber;
+	private string playerString;
     public float acceleration = 10;
     public float jumpSpeed = 10;
     public float maxVelocity;
@@ -13,6 +15,7 @@ public class PlayerMovement : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		playerString = playerNumber.ToString ();
         rb = this.GetComponent<Rigidbody>();
 
         distToGround = this.GetComponent<Collider>().bounds.extents.y;
@@ -21,25 +24,24 @@ public class PlayerMovement : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         isJumping = !isGrounded();
-
-
     }
     
     void FixedUpdate()
     {
-        if (Input.GetAxis("Horizontal") != 0)
+		if (Input.GetAxis("LeftJoystickX"+playerString) != 0)
         {
-            moveDir = new Vector3(0, 0, Input.GetAxis("Horizontal"));
-            if (Mathf.Abs(rb.velocity.z) <= maxVelocity)
+			Debug.Log ("LeftJoystickX" + playerString);
+			moveDir = new Vector3(0, 0, Input.GetAxis("LeftJoystickX"+playerString));
+			if (Mathf.Abs(rb.velocity.z) <= maxVelocity)
             {
-                rb.AddForce(moveDir * acceleration);
+				rb.AddForce(moveDir * acceleration);
             }
         } else if (!isJumping)
         {
             rb.velocity = rb.velocity / 1.2f;
         }
 
-        if (Input.GetButton("Fire2") && !isJumping)
+		if (Input.GetButton("X"+playerString) && !isJumping)
         {
             rb.AddForce(new Vector3(0, 100, 0) * jumpSpeed);
         }
@@ -48,4 +50,11 @@ public class PlayerMovement : MonoBehaviour {
     public bool isGrounded() {
         return Physics.Raycast(transform.position, -Vector3.up, distToGround + 0.1f);
     }
+
+	public void setPlayerNumb(int i){
+		playerNumber = i;
+	}
+	public int getPlayerNumb(){
+		return playerNumber;
+	}
 }
