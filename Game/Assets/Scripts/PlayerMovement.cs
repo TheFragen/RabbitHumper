@@ -1,10 +1,11 @@
 ﻿using UnityEngine;
+using XboxCtrlrInput;
 using System.Collections;
 
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerMovement : MonoBehaviour
 {
-    private int playerNumber;
+    public int playerNumber;
     private string playerString;
     public float acceleration = 10;
     public float jumpSpeed = 10;
@@ -15,10 +16,20 @@ public class PlayerMovement : MonoBehaviour
     public Animator anim;
     Vector3 moveDir = Vector3.zero;
     bool isStandingOnBullet = false;
+    XboxController controller;
 
     // Use this for initialization
     void Start()
     {
+        switch (playerNumber)
+        {
+            case 1:
+                controller = XboxController.First;
+                break;
+            case 2:
+                controller = XboxController.Second;
+                break;
+        }
         playerString = playerNumber.ToString();
 
         rb = this.GetComponent<Rigidbody>();
@@ -62,14 +73,13 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
+        
         //Accelereation
-        if (Input.GetAxis("LeftJoystickX"+playerString) != 0)
+        if (XCI.GetAxis(XboxAxis.LeftStickX, controller) != 0)
         {
-            Debug.Log(("LeftJoystickX" + playerString));
-            moveDir = new Vector3(0, 0, Input.GetAxis("LeftJoystickX" + playerString));
+            moveDir = new Vector3(0, 0, XCI.GetAxis(XboxAxis.LeftStickX, controller));
             if (Mathf.Abs(rb.velocity.z) <= maxVelocity)
             {
-                this.GetComponent<PlayerAudioHandler>().playRunning();
                 anim.SetBool("isRunning", true);
                 anim.SetFloat("runSpeed", 1f);
                 rb.AddForce(moveDir * acceleration);
@@ -93,7 +103,6 @@ public class PlayerMovement : MonoBehaviour
         {
             anim.Play("Standing");
             anim.SetBool("isRunning", false);
-            this.GetComponent<PlayerAudioHandler>().playStopping();
         }
 
         //Less running movement if jumping
@@ -106,13 +115,11 @@ public class PlayerMovement : MonoBehaviour
         if (Mathf.Abs(rb.velocity.z) < 0.1f)
         {
             anim.SetBool("isRunning", false);
-            this.GetComponent<AudioSource>().Stop();
         }
 
         //Jumping
-        if (Input.GetButton("X"+playerString) && !isStandingOnBullet && !isJumping)
+        if (XCI.GetButton(XboxButton.A, controller) && !isStandingOnBullet && !isJumping)
         {
-            Debug.Log(("X" + playerString));
             //Fix velocity so player can't mega jump on carrot
             rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
 

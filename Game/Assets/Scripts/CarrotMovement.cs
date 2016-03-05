@@ -8,7 +8,6 @@ public class CarrotMovement : MonoBehaviour {
     bool isFired = false;
     Transform spawnPoint;
     Transform parentTransform;
-    public List<Vector3> thisVelocity;
 
     // Use this for initialization
     void Start () {
@@ -17,11 +16,6 @@ public class CarrotMovement : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if(parentTransform.GetComponent<Rigidbody>().velocity.magnitude > 0)
-        {
-            thisVelocity.Add(parentTransform.GetComponent<Rigidbody>().velocity);
-        }
-
         if (parentTransform.position.x > 0.08f || parentTransform.position.x < 0.08f)
         {
             var _tmp = parentTransform.position;

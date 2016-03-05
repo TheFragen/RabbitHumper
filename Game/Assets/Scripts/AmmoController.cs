@@ -4,8 +4,6 @@ using System.Collections.Generic;
 
 public class AmmoController : MonoBehaviour {
 	public static AmmoController instance = null;
-
-
 	private int[] ammoCount;
 
 	void Awake(){
@@ -22,7 +20,7 @@ public class AmmoController : MonoBehaviour {
 	void Start () {
 		ammoCount = new int[GameManger.instance.numbPlayers];
 		for (int i = 0; i < ammoCount.Length; i++) {
-			ammoCount [i] = 0;
+			ammoCount [i] = 99;
 		}
 	}
 

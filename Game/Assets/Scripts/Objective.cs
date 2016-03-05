@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using XboxCtrlrInput;
 using System.Collections;
 
 public class Objective : MonoBehaviour {
@@ -19,6 +20,7 @@ public class Objective : MonoBehaviour {
 
 	private GameObject player1;
 	private GameObject player2;
+    public bool trigger = false;
 
 
 	// Use this for initialization
@@ -30,11 +32,12 @@ public class Objective : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (!objActive && (player1Active || player2Active)) {
-			if (player1Active && Input.GetButton ("B1")) {
+			if (player1Active && XCI.GetButton(XboxButton.X,XboxController.First)) {
 				player1Using = true;
 				startObj ();
 			} 
-			else if (player2Active && Input.GetButton ("B2")) {
+			else if (player2Active && XCI.GetButton(XboxButton.X, XboxController.Second))
+            {
 				player2Using = true;
 				startObj ();
 			} 
@@ -43,12 +46,12 @@ public class Objective : MonoBehaviour {
 		else if (objActive) {
 			float curTime = Time.time;
 
-			if (player1Using && Input.GetButton ("B1")) {
+			if (player1Using && XCI.GetButton(XboxButton.X, XboxController.First)) {
 				if (curTime >= kidTimer) {
 					spawnKid (player1);
 				}
 			} 
-			else if (player2Using && Input.GetButton ("B2")) {
+			else if (player2Using && XCI.GetButton(XboxButton.X, XboxController.Second)) {
 				if (curTime >= kidTimer) {
 					spawnKid (player2);
 				}
@@ -78,7 +81,7 @@ public class Objective : MonoBehaviour {
 		GameManger.instance.addScore(player.GetComponent<PlayerMovement> ().getPlayerNumb());
 		kidTimer += durationPerKid;
 		GameObject newKid = Instantiate (kid, gameObject.transform.position, Quaternion.identity) as GameObject;
-		newKid.GetComponent<Kid> ().setColor (player.GetComponent<MeshRenderer> ().material.color);
+	//	newKid.GetComponent<Kid> ().setColor (player.GetComponent<MeshRenderer> ().material.color);
 	}
 
 	void OnTriggerEnter(Collider other){
