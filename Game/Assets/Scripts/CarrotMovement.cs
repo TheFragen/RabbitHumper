@@ -99,7 +99,7 @@ public class CarrotMovement : MonoBehaviour {
 			}
 
 			otherRB.AddForce (knockbackDir * knockback);
-			if (!shaken) {
+			if (!shaken && !onGround) {
 				Camera.main.GetComponent<CamShaking> ().cameraShake ();
 				shaken = true;
 			}
