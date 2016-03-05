@@ -104,6 +104,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57b1a9a0027c8f14e910caae877c9ba8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerNumber: 0
+  playerString: 
   acceleration: 20
   jumpSpeed: 5
   maxVelocity: 9
