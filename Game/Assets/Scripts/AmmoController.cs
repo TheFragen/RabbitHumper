@@ -12,15 +12,14 @@ public class AmmoController : MonoBehaviour {
 			instance = this;
 		else if (instance != this)
 			Destroy (gameObject);
-
-		DontDestroyOnLoad (gameObject);
+        
 	}
 
 	// Use this for initialization
 	void Start () {
 		ammoCount = new int[GameManger.instance.numbPlayers];
 		for (int i = 0; i < ammoCount.Length; i++) {
-			ammoCount [i] = 99;
+			ammoCount [i] = 5;
 		}
 	}
 
@@ -31,6 +30,11 @@ public class AmmoController : MonoBehaviour {
 	public void addAmmo(int index){
 		ammoCount [index-1]++;
 	}
+
+    public int getAmmo(int playerID)
+    {
+        return ammoCount[playerID - 1];
+    }
 
 	/**
 	 * EXPECTS THE ACTUAL PLAYER NUMBER i.e. 1 FOR PLAYER 1, 2 FOR PLAYER 2 etc.

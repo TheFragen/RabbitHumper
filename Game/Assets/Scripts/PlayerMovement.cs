@@ -52,7 +52,7 @@ public class PlayerMovement : MonoBehaviour
 
     void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject.tag == "Platform")
+        if (other.gameObject.tag == "Platform" || other.gameObject.tag == "Kid")
         {
             isJumping = false;
         }
@@ -60,7 +60,7 @@ public class PlayerMovement : MonoBehaviour
 
     void OnCollisionExit(Collision other)
     {
-        if (other.gameObject.tag == "Platform")
+        if (other.gameObject.tag == "Platform" || other.gameObject.tag == "Kid")
         {
             isJumping = true;
         }

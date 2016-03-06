@@ -73,9 +73,10 @@ public class CarrotAiming : MonoBehaviour {
 					spawnedCarrot.GetChild (0).GetComponent<BoxCollider> ().enabled = true;
 					spawnedCarrot.GetChild (0).GetComponent<CarrotMovement> ().fireProjectile ();
 					Physics.IgnoreCollision (spawnedCarrot.GetChild (0).GetComponent<Collider> (), GetComponent<Collider> ());
+                    AmmoController.instance.subAmmo(this.transform.GetComponent<PlayerMovement>().getPlayerNumb());
 
-					//spawnedCarrot.transform.rotation = Quaternion.LookRotation(direction);                
-					spawnedCarrot = null;
+                    //spawnedCarrot.transform.rotation = Quaternion.LookRotation(direction);                
+                    spawnedCarrot = null;
 				} else {
 					Destroy (spawnedCarrot.gameObject);
 					spawnedCarrot = null;

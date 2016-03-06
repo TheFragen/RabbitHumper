@@ -37,11 +37,11 @@ public class GameManger : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		for (int i = 0; i < playerScores.Length; i++) {
+	/*	for (int i = 0; i < playerScores.Length; i++) {
 			if (playerScores [i] >= maxScore) {
 				Debug.Log ("Player " + (i + 1) + " Won");
 			}
-		}
+		}*/
 	}
 
 	/**
@@ -51,6 +51,11 @@ public class GameManger : MonoBehaviour {
 		playerScores [index - 1]++;
 		Debug.Log("Player " + index + " Score: " + playerScores[index-1]);
 	}
+
+    public int getPlayerScores(int playerID)
+    {
+        return playerScores[playerID - 1];
+    }
 
 	void spawnPlayer(){
 		for (int i = 0; i < players.Count; i++) {
