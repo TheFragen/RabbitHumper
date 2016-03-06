@@ -2071,7 +2071,7 @@ MonoBehaviour:
   spawnPoints:
   - {fileID: 1459160119}
   - {fileID: 2062325676}
-  maxScore: 6
+  maxScore: 30
   numbPlayers: 0
   players:
   - {fileID: 171786, guid: c1b16756a4dd8a743936b99ff759bfa6, type: 2}
