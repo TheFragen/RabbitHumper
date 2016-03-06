@@ -21,12 +21,13 @@ public class Objective : MonoBehaviour {
 	private GameObject player1;
 	private GameObject player2;
     public bool trigger = false;
-
+    Animator anim;
 
 	// Use this for initialization
 	void Start () {	
 		durationPerKid = duration / numberOfKids;
 		objActive = false;
+        anim = transform.GetChild(0).GetComponent<Animator>();
 	}
 	
 	// Update is called once per frame
@@ -34,12 +35,15 @@ public class Objective : MonoBehaviour {
 		if (!objActive && (player1Active || player2Active)) {
 			if (player1Active && XCI.GetButton(XboxButton.X,XboxController.First)) {
 				player1Using = true;
-				startObj ();
+                anim.SetBool("isHumping", true);
+                player1.transform.GetChild(0).GetComponent<Animator>().SetBool("isHumping", true);
+                startObj ();
 			} 
 			else if (player2Active && XCI.GetButton(XboxButton.X, XboxController.Second))
             {
 				player2Using = true;
-				startObj ();
+                player2.transform.GetChild(0).GetComponent<Animator>().SetBool("isHumping", true);
+                startObj ();
 			} 
 		}
 
@@ -58,17 +62,17 @@ public class Objective : MonoBehaviour {
 			} 
 			else {
 				DestroyObjective ();
-			}
+            }
 
 			if (curTime >= startTimer + duration) {
 				DestroyObjective ();
-			}
+            }
 		}
 
 		//If the objective was being used but the player isnt holding the button anymore.
 		if (!objActive && (player1Using || player2Using)) {
 			DestroyObjective ();
-		}
+        }
 	}
 
 	void startObj(){
@@ -107,7 +111,15 @@ public class Objective : MonoBehaviour {
 	}
 
 	void DestroyObjective(){
-		objActive = false;
+        if (player1 != null)
+        {
+            player1.transform.GetChild(0).GetComponent<Animator>().SetBool("isHumping", false);
+        }
+        else if(player2 != null)
+        {
+            player2.transform.GetChild(0).GetComponent<Animator>().SetBool("isHumping", false);
+        }
+        objActive = false;
 		player1Active = false;
 		player2Active = false;
 		player1Using = false;

@@ -8,6 +8,9 @@ public class CarrotMovement : MonoBehaviour {
     bool isFired = false;
     Transform spawnPoint;
     Transform parentTransform;
+    public AudioClip carrotAtPlayer;
+    public AudioClip carrotAtWall;
+    public AudioClip[] carrotAtCarrot = new AudioClip[2];
 
     // Use this for initialization
     void Start () {
@@ -30,8 +33,10 @@ public class CarrotMovement : MonoBehaviour {
         {
             if(parentTransform != null)
             {
+                GetComponent<AudioSource>().PlayOneShot(carrotAtWall);
                 parentTransform.GetComponent<Rigidbody>().useGravity = false;
                 parentTransform.GetComponent<Rigidbody>().isKinematic = true;
+                parentTransform.GetChild(0).GetComponent<BoxCollider>().enabled = false;
                 isFired = false;
             }
         }
@@ -49,13 +54,14 @@ public class CarrotMovement : MonoBehaviour {
                     Vector3 _curPosOther = other.transform.parent.position;
                     thisRB.velocity = new Vector3(0, 5, -thisRB.velocity.z / 1.3f);                   
                     otherRB.velocity = new Vector3(0, 5, -otherRB.velocity.z / 1.3f);
-                    
+                    GetComponent<AudioSource>().PlayOneShot(carrotAtCarrot[Random.Range(0,1)]);
 
                     //  Debug.Log("Towards");
                 }
             }
         }
 		if (other.tag == "Player1" || other.tag == "Player2") {
+            GetComponent<AudioSource>().PlayOneShot(carrotAtPlayer);
 			Rigidbody otherRB = other.transform.GetComponent<Rigidbody>();
 			Rigidbody thisRB = parentTransform.GetComponent<Rigidbody>();
 
