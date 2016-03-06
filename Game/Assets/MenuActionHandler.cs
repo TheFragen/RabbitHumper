@@ -9,19 +9,19 @@ public class MenuActionHandler : MonoBehaviour {
 	XboxController controller1;
 	XboxController controller2;
 
-	public Text Text1, Text1P, Text2, Text2P;
+	public Text Text1, Text2;
 
 	bool player1 = false;
 	bool player2 = false;
 
 	// Use this for initialization
 	void Awake () {
+		player1 = false;
+		player2 = false;
 		controller1 = XboxController.First;
 		controller2 = XboxController.Second;
-		Text1.transform.gameObject.SetActive (true);
-		Text1P.transform.gameObject.SetActive (false);
-		Text2.transform.gameObject.SetActive (true);
-		Text2P.transform.gameObject.SetActive (false);
+		Text1.text = "Player 1 press 'A'";
+		Text2.text = "Player 2 press 'A'";
 	}
 	
 	// Update is called once per frame
@@ -29,13 +29,11 @@ public class MenuActionHandler : MonoBehaviour {
 
 		if (!player1 && XCI.GetButton (XboxButton.A, controller1)) {
 			player1 = true;
-			Text1.transform.parent.gameObject.SetActive (false);
-			Text1P.transform.parent.gameObject.SetActive (true);
+			Text1.text = "Player 1 ready";
 		}
 		if (!player2 && XCI.GetButton (XboxButton.A, controller2)) {
 			player2 = true;
-			Text2.transform.parent.gameObject.SetActive (false);
-			Text2P.transform.parent.gameObject.SetActive (true);
+			Text2.text = "Player 2 ready";
 		}
 			
 		if (player1 && player2 || Input.GetKey(KeyCode.Return)) {
