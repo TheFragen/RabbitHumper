@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
-
+using XboxCtrlrInput;
 
 public class camWin : MonoBehaviour {
 
@@ -32,9 +32,9 @@ public class camWin : MonoBehaviour {
 	void Update(){
 		if (gameWon) {
 
-			if (Time.time >= (startTimer + timer)) {
+			if (XCI.GetButton(XboxButton.Start)) {
 				Debug.Log ("LOADSCENE");
-				SceneManager.LoadScene(1);
+				SceneManager.LoadScene(0);
 			} else {
 				float t = (Time.time - startTimer) / zoomDur;
 				Debug.Log ("MOVECAMERA");
@@ -50,4 +50,15 @@ public class camWin : MonoBehaviour {
 			}
 		}
 	}
+
+
+    public bool getGameWon()
+    {
+        return gameWon;
+    }
+
+    public GameObject getWinner()
+    {
+        return winner;
+    }
 }
