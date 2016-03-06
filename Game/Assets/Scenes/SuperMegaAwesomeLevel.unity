@@ -98,6 +98,7 @@ GameObject:
   - 124: {fileID: 33635968}
   - 81: {fileID: 33635967}
   - 114: {fileID: 33635972}
+  - 114: {fileID: 33635973}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -185,6 +186,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   camShakeDur: 0.5
   shakeWeight: 0.05
+--- !u!114 &33635973
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 33635966}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 044f5fb526e40a14f9a502c2784b82e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timer: 5
+  dist: 7
+  zoomDur: 2
 --- !u!1 &39073987
 GameObject:
   m_ObjectHideFlags: 0
@@ -256,9 +271,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1850884895}
   m_RootOrder: 7
-  m_AnchorMin: {x: 1, y: 1}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -42.4, y: -53.299988}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 45.559998, y: -53.299988}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &39073991
@@ -1182,9 +1197,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1850884895}
   m_RootOrder: 6
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 46.61, y: -53.3}
+  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -42.400024, y: -53.3}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &634349992

@@ -12,6 +12,7 @@ public class GameManger : MonoBehaviour {
 	private int[] playerScores;
     public Material[] blueMats = new Material[2];
     public Material[] redMats = new Material[2];
+	private bool gameOver = false;
 
 
     void Awake(){
@@ -21,6 +22,7 @@ public class GameManger : MonoBehaviour {
 		else if (instance != this)
 			Destroy (gameObject);
         numbPlayers = players.Count;
+		gameOver = false;
     }
 
 	// Use this for initialization
@@ -35,11 +37,15 @@ public class GameManger : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-	/*	for (int i = 0; i < playerScores.Length; i++) {
-			if (playerScores [i] >= maxScore) {
-				Debug.Log ("Player " + (i + 1) + " Won");
+		if (!gameOver) {
+			for (int i = 0; i < playerScores.Length; i++) {
+				if (playerScores [i] >= maxScore) {
+					Debug.Log (i + 1);
+					Camera.main.gameObject.GetComponent<camWin> ().zoomIn (GameObject.FindGameObjectWithTag ("Player" + (i + 1)));
+					gameOver = true;
+				}
 			}
-		}*/
+		}
 	}
 
 	/**
