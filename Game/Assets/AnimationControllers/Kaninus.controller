@@ -107,11 +107,11 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.5460664
-  m_TransitionOffset: 1.6865108
-  m_ExitTime: 0.8648777
+  m_TransitionDuration: 0.14608239
+  m_TransitionOffset: 0
+  m_ExitTime: 0.85720927
   m_HasExitTime: 0
-  m_HasFixedDuration: 1
+  m_HasFixedDuration: 0
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
@@ -220,7 +220,7 @@ AnimatorState:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: Humping 0
-  m_Speed: 1
+  m_Speed: 2.5
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 110148214}
@@ -243,7 +243,7 @@ AnimatorState:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: Standing 0
+  m_Name: Standing
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:

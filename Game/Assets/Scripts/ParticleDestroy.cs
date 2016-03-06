@@ -2,21 +2,21 @@
 using System.Collections;
 
 public class ParticleDestroy : MonoBehaviour {
-    public int waitSeconds = 1;
+    public float waitSeconds = 1;
 
 	// Use this for initialization
 	void Start () {
-        StartCoroutine("destroyAfterPlay");
+        StartCoroutine(destroyAfterPlay(waitSeconds));
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update () {
 	
 	}
 
-    IEnumerator destroyAfterPlay()
+    IEnumerator destroyAfterPlay(float waitTime)
     {
-        yield return new WaitForSeconds(waitSeconds);
-        Destroy(this);
+        yield return new WaitForSeconds(waitTime);
+        Destroy(this.gameObject);
     }
 }
