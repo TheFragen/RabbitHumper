@@ -8,7 +8,7 @@ public class CamShaking : MonoBehaviour {
 	private bool camShaking = false;
 	private bool movingBack = false;
 	private float camTimer;
-	public float camShakeDur = 1.0f;
+	public float camShakeDur = 0.5f;
 	public float shakeWeight = 0.05f;
 	private float moveBackTime = 0.5f;
 	private float moveBackStart;
@@ -37,7 +37,8 @@ public class CamShaking : MonoBehaviour {
 				}
 			} 
 			else {
-				main.transform.position += Random.insideUnitSphere * shakeWeight;
+				Vector2 random = Random.insideUnitCircle;
+				main.transform.position += new Vector3 (0.0f, random.y, random.x) * shakeWeight;
 			}
 		}
 	}
