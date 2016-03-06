@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Ammo : MonoBehaviour {
 
-
+	public AudioClip[] carrotPickUpSound = new AudioClip[3];
 	public float worldRotationSpeed = 20.0f;
 	public float localRotationSpeed = 10.0f;
 	public float bounce = 0.001f;
@@ -50,6 +50,8 @@ public class Ammo : MonoBehaviour {
 
 
 	void DestroyAmmo(){
+		int var = Random.Range(0, 3);
+		this.GetComponent<AudioSource> ().PlayOneShot (carrotPickUpSound [var]);
 		AmmoSpawner.instance.setSpaceOccupied(index);
 		Destroy (gameObject);
 	}
