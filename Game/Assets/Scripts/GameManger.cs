@@ -20,11 +20,11 @@ public class GameManger : MonoBehaviour {
 			Destroy (gameObject);
 
 		DontDestroyOnLoad (gameObject);
-	}
+        numbPlayers = players.Count;
+    }
 
 	// Use this for initialization
 	void Start () {
-		numbPlayers = players.Count;
 		players.Capacity = numbPlayers;
 		playerScores = new int[numbPlayers];
 		for (int i = 0; i < playerScores.Length; i++) {
@@ -54,6 +54,7 @@ public class GameManger : MonoBehaviour {
 		for (int i = 0; i < players.Count; i++) {
 			int index = Random.Range (0, spawnPoints.Count);
 			GameObject player = Instantiate (players [i], spawnPoints [index].transform.position, Quaternion.identity) as GameObject;
+            player.gameObject.tag = "Player" + (i + 1);
 			GameObject prev = spawnPoints [index];
 			spawnPoints.Remove (prev);
 			player.GetComponent<PlayerMovement> ().setPlayerNumb (i + 1);

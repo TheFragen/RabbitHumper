@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using XboxCtrlrInput;
 using System.Collections;
 
 public class Objective : MonoBehaviour {
@@ -19,53 +20,59 @@ public class Objective : MonoBehaviour {
 
 	private GameObject player1;
 	private GameObject player2;
-
+    public bool trigger = false;
+    Animator anim;
 
 	// Use this for initialization
 	void Start () {	
 		durationPerKid = duration / numberOfKids;
 		objActive = false;
+        anim = transform.GetChild(0).GetComponent<Animator>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		if (!objActive && (player1Active || player2Active)) {
-			if (player1Active && Input.GetButton ("B1")) {
+			if (player1Active && XCI.GetButton(XboxButton.X,XboxController.First)) {
 				player1Using = true;
-				startObj ();
+                anim.SetBool("isHumping", true);
+                player1.transform.GetChild(0).GetComponent<Animator>().SetBool("isHumping", true);
+                startObj ();
 			} 
-			else if (player2Active && Input.GetButton ("B2")) {
+			else if (player2Active && XCI.GetButton(XboxButton.X, XboxController.Second))
+            {
 				player2Using = true;
-				startObj ();
+                player2.transform.GetChild(0).GetComponent<Animator>().SetBool("isHumping", true);
+                startObj ();
 			} 
 		}
 
 		else if (objActive) {
 			float curTime = Time.time;
 
-			if (player1Using && Input.GetButton ("B1")) {
+			if (player1Using && XCI.GetButton(XboxButton.X, XboxController.First)) {
 				if (curTime >= kidTimer) {
 					spawnKid (player1);
 				}
 			} 
-			else if (player2Using && Input.GetButton ("B2")) {
+			else if (player2Using && XCI.GetButton(XboxButton.X, XboxController.Second)) {
 				if (curTime >= kidTimer) {
 					spawnKid (player2);
 				}
 			} 
 			else {
 				DestroyObjective ();
-			}
+            }
 
 			if (curTime >= startTimer + duration) {
 				DestroyObjective ();
-			}
+            }
 		}
 
 		//If the objective was being used but the player isnt holding the button anymore.
 		if (!objActive && (player1Using || player2Using)) {
 			DestroyObjective ();
-		}
+        }
 	}
 
 	void startObj(){
@@ -78,7 +85,7 @@ public class Objective : MonoBehaviour {
 		GameManger.instance.addScore(player.GetComponent<PlayerMovement> ().getPlayerNumb());
 		kidTimer += durationPerKid;
 		GameObject newKid = Instantiate (kid, gameObject.transform.position, Quaternion.identity) as GameObject;
-		newKid.GetComponent<Kid> ().setColor (player.GetComponent<MeshRenderer> ().material.color);
+	//	newKid.GetComponent<Kid> ().setColor (player.GetComponent<MeshRenderer> ().material.color);
 	}
 
 	void OnTriggerEnter(Collider other){
@@ -104,7 +111,15 @@ public class Objective : MonoBehaviour {
 	}
 
 	void DestroyObjective(){
-		objActive = false;
+        if (player1 != null)
+        {
+            player1.transform.GetChild(0).GetComponent<Animator>().SetBool("isHumping", false);
+        }
+        else if(player2 != null)
+        {
+            player2.transform.GetChild(0).GetComponent<Animator>().SetBool("isHumping", false);
+        }
+        objActive = false;
 		player1Active = false;
 		player2Active = false;
 		player1Using = false;

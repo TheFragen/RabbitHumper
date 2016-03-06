@@ -8,7 +8,9 @@ public class CarrotMovement : MonoBehaviour {
     bool isFired = false;
     Transform spawnPoint;
     Transform parentTransform;
-    public List<Vector3> thisVelocity;
+    public AudioClip carrotAtPlayer;
+    public AudioClip carrotAtWall;
+    public AudioClip[] carrotAtCarrot = new AudioClip[2];
 
 	private float despawnTimer;
 	public float duration = 5.0f;
@@ -23,11 +25,6 @@ public class CarrotMovement : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if(parentTransform.GetComponent<Rigidbody>().velocity.magnitude > 0)
-        {
-            thisVelocity.Add(parentTransform.GetComponent<Rigidbody>().velocity);
-        }
-
         if (parentTransform.position.x > 0.08f || parentTransform.position.x < 0.08f)
         {
             var _tmp = parentTransform.position;
@@ -47,8 +44,10 @@ public class CarrotMovement : MonoBehaviour {
         {
             if(parentTransform != null)
             {
+                GetComponent<AudioSource>().PlayOneShot(carrotAtWall);
                 parentTransform.GetComponent<Rigidbody>().useGravity = false;
                 parentTransform.GetComponent<Rigidbody>().isKinematic = true;
+                parentTransform.GetChild(0).GetComponent<BoxCollider>().enabled = false;
                 isFired = false;
             }
 			if (!onGround) {
@@ -70,15 +69,16 @@ public class CarrotMovement : MonoBehaviour {
                     Vector3 _curPosOther = other.transform.parent.position;
                     thisRB.velocity = new Vector3(0, 5, -thisRB.velocity.z / 1.3f);                   
                     otherRB.velocity = new Vector3(0, 5, -otherRB.velocity.z / 1.3f);
-                    
+                    GetComponent<AudioSource>().PlayOneShot(carrotAtCarrot[Random.Range(0,1)]);
 
                     //  Debug.Log("Towards");
                 }
             }
         }
 		if (other.tag == "Player1" || other.tag == "Player2") {
-			Rigidbody otherRB = other.transform.GetComponent<Rigidbody> ();
-			Rigidbody thisRB = parentTransform.GetComponent<Rigidbody> ();
+            GetComponent<AudioSource>().PlayOneShot(carrotAtPlayer);
+			Rigidbody otherRB = other.transform.GetComponent<Rigidbody>();
+			Rigidbody thisRB = parentTransform.GetComponent<Rigidbody>();
 
 			Vector3 dir = thisRB.velocity.normalized;
 			Vector3 knockbackDir = Vector3.zero;
