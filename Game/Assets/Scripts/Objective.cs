@@ -3,11 +3,11 @@ using System.Collections;
 
 public class Objective : MonoBehaviour {
 
-	[HideInInspector] bool objActive = false;
 	public GameObject kid;
 	public float duration = 5.0f;
 	public int numberOfKids = 6;
 
+	public bool objActive = false;
 	private bool player1Active = false;
 	private bool player2Active = false;
 	private bool player1Using = false;
@@ -24,36 +24,37 @@ public class Objective : MonoBehaviour {
 	// Use this for initialization
 	void Start () {	
 		durationPerKid = duration / numberOfKids;
+		objActive = false;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if (!objActive) {
-			if (player1Active && Input.GetButton ("Fire3")) {
+		if (!objActive && (player1Active || player2Active)) {
+			if (player1Active && Input.GetButton ("B1")) {
 				player1Using = true;
-			} else if (player2Active && Input.GetButton ("Fire3")) {
-				player2Using = true;
+				startObj ();
 			} 
-			objActive = true;
-			startTimer = Time.time;
-			kidTimer = startTimer + durationPerKid;
+			else if (player2Active && Input.GetButton ("B2")) {
+				player2Using = true;
+				startObj ();
+			} 
 		}
 
 		else if (objActive) {
 			float curTime = Time.time;
 
-			if (player1Using && Input.GetButton ("Fire3")) {
+			if (player1Using && Input.GetButton ("B1")) {
 				if (curTime >= kidTimer) {
 					spawnKid (player1);
 				}
 			} 
-			else if (player2Using && Input.GetButton ("Fire3")) {
+			else if (player2Using && Input.GetButton ("B2")) {
 				if (curTime >= kidTimer) {
 					spawnKid (player2);
 				}
 			} 
 			else {
-				objActive = false;
+				DestroyObjective ();
 			}
 
 			if (curTime >= startTimer + duration) {
@@ -65,19 +66,16 @@ public class Objective : MonoBehaviour {
 		if (!objActive && (player1Using || player2Using)) {
 			DestroyObjective ();
 		}
-
 	}
 
+	void startObj(){
+		objActive = true;
+		startTimer = Time.time;
+		kidTimer = startTimer + durationPerKid;
+	}
 
 	void spawnKid(GameObject player){
-		int playerNumb = -1;
-		if(player.CompareTag("Player1")){
-			playerNumb = 1;
-		}
-		else if(player.CompareTag("Player1")){
-			playerNumb = 2;
-		}
-		GameManger.instance.addScore(playerNumb);
+		GameManger.instance.addScore(player.GetComponent<PlayerMovement> ().getPlayerNumb());
 		kidTimer += durationPerKid;
 		GameObject newKid = Instantiate (kid, gameObject.transform.position, Quaternion.identity) as GameObject;
 		newKid.GetComponent<Kid> ().setColor (player.GetComponent<MeshRenderer> ().material.color);
