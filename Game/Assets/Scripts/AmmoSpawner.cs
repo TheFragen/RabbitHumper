@@ -23,7 +23,6 @@ public class AmmoSpawner : MonoBehaviour {
 		else if (instance != this)
 			Destroy (gameObject);
 
-		DontDestroyOnLoad (gameObject);
 	}
 
 	// Use this for initialization

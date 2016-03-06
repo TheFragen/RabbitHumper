@@ -139,7 +139,6 @@ public class PlayerMovement : MonoBehaviour
 
     public void setPlayerColor(Material[] mats)
     {
-        Debug.Log(transform.GetChild(0).Find("polySurface108").GetComponent<Renderer>().material);
         Material[] _tmpA = this.transform.GetChild(0).Find("polySurface108").GetComponent<Renderer>().materials;
         _tmpA[2] = mats[0];
         _tmpA[3] = mats[1];

@@ -20,8 +20,6 @@ public class GameManger : MonoBehaviour {
 			instance = this;
 		else if (instance != this)
 			Destroy (gameObject);
-
-		DontDestroyOnLoad (gameObject);
         numbPlayers = players.Count;
     }
 
@@ -65,7 +63,7 @@ public class GameManger : MonoBehaviour {
 			GameObject prev = spawnPoints [index];
 			spawnPoints.Remove (prev);
 			player.GetComponent<PlayerMovement> ().setPlayerNumb (i + 1);
-            Debug.Log(i);
+
             if (i < 1) //Blue
             {
                 player.GetComponent<PlayerMovement>().setPlayerColor(blueMats);

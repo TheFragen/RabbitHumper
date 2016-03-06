@@ -49,6 +49,7 @@ public class Objective : MonoBehaviour {
 			else if (player2Active && XCI.GetButton(XboxButton.X, XboxController.Second))
             {
 				player2Using = true;
+                anim.SetBool("isHumping", true);
                 player2.transform.GetChild(0).GetComponent<Animator>().SetBool("isHumping", true);
                 startObj ();
 			} 

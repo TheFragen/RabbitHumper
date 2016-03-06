@@ -20,7 +20,9 @@ public class MenuActionHandler : MonoBehaviour {
 		player2 = false;
 		controller1 = XboxController.First;
 		controller2 = XboxController.Second;
-		Text1.text = "Player 1 press 'A'";
+        Text1.color = Color.white;
+        Text2.color = Color.white;
+        Text1.text = "Player 1 press 'A'";
 		Text2.text = "Player 2 press 'A'";
 	}
 	
@@ -29,10 +31,12 @@ public class MenuActionHandler : MonoBehaviour {
 
 		if (!player1 && XCI.GetButton (XboxButton.A, controller1)) {
 			player1 = true;
-			Text1.text = "Player 1 ready";
+            Text1.color = Color.green;
+            Text1.text = "Player 1 ready";
 		}
 		if (!player2 && XCI.GetButton (XboxButton.A, controller2)) {
 			player2 = true;
+            Text2.color = Color.green;
 			Text2.text = "Player 2 ready";
 		}
 			

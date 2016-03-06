@@ -22,8 +22,6 @@ public class ObjectiveSpawner : MonoBehaviour {
 			instance = this;
 		else if (instance != this)
 			Destroy (gameObject);
-
-		DontDestroyOnLoad (gameObject);
 	}
 
 
