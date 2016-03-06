@@ -102,7 +102,6 @@ public class PlayerMovement : MonoBehaviour
         //No animation if no movement
         if (rb.velocity.sqrMagnitude < 0.2f)
         {
-            anim.Play("Standing");
             anim.SetBool("isRunning", false);
         }
 
