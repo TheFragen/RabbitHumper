@@ -20,14 +20,21 @@ public class Objective : MonoBehaviour {
 
 	private GameObject player1;
 	private GameObject player2;
-    public bool trigger = false;
     Animator anim;
+
+    public AudioClip[] kidSpawnSound = new AudioClip[6];
+    int kidSpawnSoundIndex = 0;
+    public AudioClip spawnSound;
+
+    public Material redBaby;
+    public Material blueBaby;
 
 	// Use this for initialization
 	void Start () {	
 		durationPerKid = duration / numberOfKids;
 		objActive = false;
         anim = transform.GetChild(0).GetComponent<Animator>();
+        this.GetComponent<AudioSource>().PlayOneShot(spawnSound);
 	}
 	
 	// Update is called once per frame
@@ -85,8 +92,24 @@ public class Objective : MonoBehaviour {
 		GameManger.instance.addScore(player.GetComponent<PlayerMovement> ().getPlayerNumb());
 		kidTimer += durationPerKid;
 		GameObject newKid = Instantiate (kid, gameObject.transform.position, Quaternion.identity) as GameObject;
-	//	newKid.GetComponent<Kid> ().setColor (player.GetComponent<MeshRenderer> ().material.color);
-	}
+        if(kidSpawnSoundIndex < kidSpawnSound.Length)
+        {
+            GetComponent<AudioSource>().PlayOneShot(kidSpawnSound[kidSpawnSoundIndex++]);
+        }
+
+
+        Material[] _tmp = newKid.transform.GetComponent<Renderer>().materials;
+        if (player.GetComponent<PlayerMovement>().playerNumber == 1) //Blue
+        {
+            _tmp[3] = blueBaby;
+        } else
+        {
+            _tmp[3] = redBaby;
+        }
+
+        newKid.transform.GetComponent<Renderer>().materials = _tmp;
+        //	newKid.GetComponent<Kid> ().setColor (player.GetComponent<MeshRenderer> ().material.color);
+    }
 
 	void OnTriggerEnter(Collider other){
 		if (other.CompareTag ("Player1")) {

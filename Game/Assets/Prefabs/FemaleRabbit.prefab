@@ -466,6 +466,7 @@ GameObject:
   - 4: {fileID: 495442}
   - 114: {fileID: 11411668}
   - 65: {fileID: 6511186}
+  - 82: {fileID: 8237816}
   m_Layer: 0
   m_Name: FemaleRabbit
   m_TagString: Untagged
@@ -1313,7 +1314,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 168312}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: -0.00000016292068}
   m_LocalPosition: {x: 0.38, y: -2.64, z: -2.653505}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1575,6 +1576,80 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 2.06, z: 2.96}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!82 &8237816
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 168312}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 0.02
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!95 &9550696
 Animator:
   serializedVersion: 3
@@ -1603,11 +1678,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37f40c1274b4bd24699b26d075fa1c0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  kid: {fileID: 126794, guid: 36f3b9a081e2f7a4594858895cbc76db, type: 2}
+  kid: {fileID: 178976, guid: a1a8290c1325951499caf72d9c5d91ec, type: 2}
   duration: 5
   numberOfKids: 6
   objActive: 0
-  trigger: 0
+  kidSpawnSound:
+  - {fileID: 8300000, guid: 9c695a86e5998e04c87d3780a72f367f, type: 3}
+  - {fileID: 8300000, guid: d106b5b921d17654f881a5f601d3d3be, type: 3}
+  - {fileID: 8300000, guid: 11a1e4ffdc85fc444a34aa2fcc91a5e8, type: 3}
+  - {fileID: 8300000, guid: f8d17c1cb8a9ce4469949f0d43866982, type: 3}
+  - {fileID: 8300000, guid: 650ab3664179da14e88093277dc61165, type: 3}
+  - {fileID: 8300000, guid: 65f42f5b84ebdc34bbb23900ee41cd6a, type: 3}
+  spawnSound: {fileID: 8300000, guid: 29aaf52036a0e324c955ab3572170e3f, type: 3}
+  redBaby: {fileID: 2100000, guid: 2ead735cd5a7e7545afc340c5294f0e1, type: 2}
+  blueBaby: {fileID: 2100000, guid: c06ff957841d5834aa2426857b50c4ae, type: 2}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

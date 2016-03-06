@@ -10,9 +10,11 @@ public class GameManger : MonoBehaviour {
 	[HideInInspector] public int numbPlayers;
 	public List<GameObject> players = new List<GameObject>();
 	private int[] playerScores;
+    public Material[] blueMats = new Material[2];
+    public Material[] redMats = new Material[2];
 
 
-	void Awake(){
+    void Awake(){
 		//Makes the manager a singleton which persists through scenes
 		if (instance == null)
 			instance = this;
@@ -35,11 +37,11 @@ public class GameManger : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		for (int i = 0; i < playerScores.Length; i++) {
+	/*	for (int i = 0; i < playerScores.Length; i++) {
 			if (playerScores [i] >= maxScore) {
 				Debug.Log ("Player " + (i + 1) + " Won");
 			}
-		}
+		}*/
 	}
 
 	/**
@@ -50,6 +52,11 @@ public class GameManger : MonoBehaviour {
 		Debug.Log("Player " + index + " Score: " + playerScores[index-1]);
 	}
 
+    public int getPlayerScores(int playerID)
+    {
+        return playerScores[playerID - 1];
+    }
+
 	void spawnPlayer(){
 		for (int i = 0; i < players.Count; i++) {
 			int index = Random.Range (0, spawnPoints.Count);
@@ -58,6 +65,15 @@ public class GameManger : MonoBehaviour {
 			GameObject prev = spawnPoints [index];
 			spawnPoints.Remove (prev);
 			player.GetComponent<PlayerMovement> ().setPlayerNumb (i + 1);
-		}
+            Debug.Log(i);
+            if (i < 1) //Blue
+            {
+                player.GetComponent<PlayerMovement>().setPlayerColor(blueMats);
+            }
+            else //Red
+            {
+                player.GetComponent<PlayerMovement>().setPlayerColor(redMats);
+            }
+        }
 	}
 }
