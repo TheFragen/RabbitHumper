@@ -45,8 +45,16 @@ public class MenuActionHandler : MonoBehaviour {
 			float t = (Time.time -start)/screenFader;
 			if (t < 1.0f) {
 				img.color = Color.Lerp (img.color, imgColor, t);
-				Text1.color = Color.Lerp (new Color(Text1.color.r,Text1.color.g,Text1.color.b,0.0f),Color.white, t);
-				Text2.color = Color.Lerp (new Color(Text2.color.r,Text2.color.g,Text2.color.b,0.0f), Color.white, t);
+				if (player1) {
+					Text1.color = Color.Lerp (new Color (Text1.color.r, Text1.color.g, Text1.color.b, 0.0f), Color.green, t);
+				} else {
+					Text1.color = Color.Lerp (new Color (Text1.color.r, Text1.color.g, Text1.color.b, 0.0f), Color.white, t);
+				}
+				if (player2) {
+					Text2.color = Color.Lerp (new Color (Text2.color.r, Text2.color.g, Text2.color.b, 0.0f), Color.green, t);
+				} else {
+					Text2.color = Color.Lerp (new Color (Text2.color.r, Text2.color.g, Text2.color.b, 0.0f), Color.white, t);
+				}
 			}
 		}
 
@@ -69,12 +77,12 @@ public class MenuActionHandler : MonoBehaviour {
 		}
 		if (loadLevelB) {
 				float t = (Time.time - start)/screenFader;
-				if (t < 1.0f) {
+				if (t <= 1.0f) {
 				img.color = Color.Lerp (img.color, Color.black, t);
-				Text1.color = Color.Lerp (Text1.color,new Color(Text1.color.r,Text1.color.g,Text1.color.b,0.0f), t);
-				Text2.color = Color.Lerp (Text2.color, new Color(Text2.color.r,Text2.color.g,Text2.color.b,0.0f), t);
+				Text1.color = Color.Lerp (Text1.color,new Color(Color.green.r,Color.green.g,Color.green.b, 0.0f), t);
+				Text2.color = Color.Lerp (Text2.color, new Color(Color.green.r,Color.green.g,Color.green.b,0.0f), t);
 				} else {
-					loadLevel (1);
+					loadLevel (2);
 				}
 		}
 	}

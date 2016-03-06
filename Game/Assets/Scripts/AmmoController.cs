@@ -4,6 +4,8 @@ using System.Collections.Generic;
 
 public class AmmoController : MonoBehaviour {
 	public static AmmoController instance = null;
+
+	public AudioClip[] carrotPickUpSound = new AudioClip[2];
 	private int[] ammoCount;
 
 	void Awake(){
@@ -29,6 +31,7 @@ public class AmmoController : MonoBehaviour {
 	 */
 	public void addAmmo(int index){
 		ammoCount [index-1]++;
+		PlayPickUp ();
 	}
 
     public int getAmmo(int playerID)
@@ -48,5 +51,10 @@ public class AmmoController : MonoBehaviour {
 	 */
 	public bool stillAmmo(int index){
 		return ammoCount [index - 1] != 0;
+	}
+
+	void PlayPickUp(){
+		int var = Random.Range(0, carrotPickUpSound.Length);
+		this.GetComponent<AudioSource> ().PlayOneShot (carrotPickUpSound [var]);
 	}
 }

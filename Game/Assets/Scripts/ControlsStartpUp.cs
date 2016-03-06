@@ -36,7 +36,7 @@ public class ControlsStartpUp : MonoBehaviour {
 		}	
 
 		if (Time.time >= (start + timer)) {
-			SceneManager.LoadScene(0);
+			SceneManager.LoadScene(1);
 		}	
 	}
 }

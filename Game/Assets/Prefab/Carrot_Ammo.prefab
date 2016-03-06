@@ -505,9 +505,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   carrotSpawnSound:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 8300000, guid: d316b65285533a042b507367f4ac3791, type: 3}
+  - {fileID: 8300000, guid: 2fa1b2aff98ce804a93aa1f7b78b9438, type: 3}
+  - {fileID: 8300000, guid: 02b0742e5c47825459c0a6b98b6f315b, type: 3}
   worldRotationSpeed: 20
   localRotationSpeed: 10
   bounce: 0.001

@@ -15,6 +15,7 @@ public class camWin : MonoBehaviour {
 	private Vector3 playerPos;
 	private Vector3 finalPos;
 	private GameObject winner;
+	private bool stopped = false;
 
 	void Start(){
 		camPos = Camera.main.transform.position;
@@ -33,14 +34,17 @@ public class camWin : MonoBehaviour {
 
 			if (Time.time >= (startTimer + timer)) {
 				Debug.Log ("LOADSCENE");
-				SceneManager.LoadScene(0);
+				SceneManager.LoadScene(1);
 			} else {
 				float t = (Time.time - startTimer) / zoomDur;
 				Debug.Log ("MOVECAMERA");
 				if (t < 1.0f) {
 					Camera.main.transform.position = Vector3.Lerp (camPos, winner.transform.position+ new Vector3(dist,0.0f,0.0f), t);
 					} else {
-					finalPos = Camera.main.transform.position-winner.transform.position;
+					if (!stopped) {
+						finalPos = Camera.main.transform.position - winner.transform.position;
+						stopped = true;
+					}
 					Camera.main.transform.position = winner.transform.position + finalPos;
 				}
 			}
