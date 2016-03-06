@@ -14,6 +14,8 @@ public class CarrotAiming : MonoBehaviour {
 	private string playerString;
     XboxController controller;
     Vector3 upFix = new Vector3(0, 1.2f, 0);
+    float letGoTime;
+
 
     // Use this for initialization
     void Start () {

@@ -75,6 +75,11 @@ public class MenuActionHandler : MonoBehaviour {
 				start = Time.time;
 			}
 		}
+
+        if (XCI.GetButton(XboxButton.Back))
+        {
+            Application.Quit();
+        }
 		if (loadLevelB) {
 				float t = (Time.time - start)/screenFader;
 				if (t <= 1.0f) {

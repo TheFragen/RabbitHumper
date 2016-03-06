@@ -21,7 +21,7 @@ public class AmmoController : MonoBehaviour {
 	void Start () {
 		ammoCount = new int[GameManger.instance.numbPlayers];
 		for (int i = 0; i < ammoCount.Length; i++) {
-			ammoCount [i] = 5;
+			ammoCount [i] = 8;
 		}
 	}
 

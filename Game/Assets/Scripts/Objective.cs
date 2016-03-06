@@ -43,14 +43,21 @@ public class Objective : MonoBehaviour {
 			if (player1Active && XCI.GetButton(XboxButton.X,XboxController.First)) {
 				player1Using = true;
                 anim.SetBool("isHumping", true);
-                player1.transform.GetChild(0).GetComponent<Animator>().SetBool("isHumping", true);
+                if (!player1.transform.GetChild(0).GetComponent<Animator>().GetBool("isHumping"))
+                {
+                    player1.transform.GetChild(0).GetComponent<Animator>().SetBool("isHumping", true);
+                }
+                
                 startObj ();
 			} 
 			else if (player2Active && XCI.GetButton(XboxButton.X, XboxController.Second))
             {
 				player2Using = true;
                 anim.SetBool("isHumping", true);
-                player2.transform.GetChild(0).GetComponent<Animator>().SetBool("isHumping", true);
+                if (!player2.transform.GetChild(0).GetComponent<Animator>().GetBool("isHumping"))
+                {
+                    player2.transform.GetChild(0).GetComponent<Animator>().SetBool("isHumping", true);
+                }
                 startObj ();
 			} 
 		}
@@ -127,11 +134,13 @@ public class Objective : MonoBehaviour {
 		if (other.CompareTag ("Player1")) {
 			player1Active = false;
 			player1Using = false;
-		}
+            player1.transform.GetChild(0).GetComponent<Animator>().SetBool("isHumping", false);
+        }
 		if (other.CompareTag ("Player2")) {
 			player2Active = false;
 			player2Using = false;
-		}
+            player1.transform.GetChild(0).GetComponent<Animator>().SetBool("isHumping", false);
+        }
 	}
 
 	void DestroyObjective(){

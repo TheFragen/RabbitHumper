@@ -187,8 +187,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72324c0038c97464aaec800d3166e5a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxJumpForce: 100
-  minJumpForce: 200
+  maxJumpForce: 500
+  minJumpForce: 300
   jumpTimer: 0.5
   bounceSounds:
   - {fileID: 8300000, guid: ce1503b8489a0b5479f948ed12040e83, type: 3}

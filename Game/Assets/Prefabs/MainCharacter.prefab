@@ -296,12 +296,12 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.02
+  m_Volume: 0.2
   m_Pitch: 1
   Loop: 0
   Mute: 0
   Spatialize: 0
-  Priority: 128
+  Priority: 127
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500
@@ -423,7 +423,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   carrot: {fileID: 478508, guid: eb3f62b94625c26459db91b272a69098, type: 2}
   spawnedCarrot: {fileID: 0}
-  projectileForce: 1000
+  projectileForce: 2000
   fireWaitTime: 0.1
 --- !u!1001 &100100000
 Prefab:

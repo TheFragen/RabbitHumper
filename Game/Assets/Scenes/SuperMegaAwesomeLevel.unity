@@ -1081,8 +1081,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 467901481}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.57, y: 7.9, z: 24.4}
-  m_LocalScale: {x: 2.2043784, y: 55.43687, z: 4.911149}
+  m_LocalPosition: {x: 0.57, y: 138.24, z: 24.4}
+  m_LocalScale: {x: 2.2043784, y: 316.4126, z: 4.911149}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 14
@@ -1366,7 +1366,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 642499980}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.33, y: 3.76, z: 20.81}
+  m_LocalPosition: {x: 0.33, y: 2.21, z: 20.81}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1452,7 +1452,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.08
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -2283,7 +2283,7 @@ MonoBehaviour:
   spawnPoints:
   - {fileID: 1459160119}
   - {fileID: 2062325676}
-  maxScore: 1
+  maxScore: 30
   numbPlayers: 0
   players:
   - {fileID: 171786, guid: c1b16756a4dd8a743936b99ff759bfa6, type: 2}
@@ -2804,8 +2804,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1323910793}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.57, y: 9.7, z: -22.81}
-  m_LocalScale: {x: 2.2043784, y: 59.165234, z: 5.430979}
+  m_LocalPosition: {x: 0.57, y: 149.9, z: -22.81}
+  m_LocalScale: {x: 2.2043784, y: 337.6927, z: 5.430979}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 13
@@ -3526,9 +3526,9 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 9ffc4693d0f316841b705dd9818f9633, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 52a249900840afb4ebca4798276f74d4, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.045
+  m_Volume: 0.3
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -3768,7 +3768,7 @@ MonoBehaviour:
   m_Script: {fileID: 1980459831, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
