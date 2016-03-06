@@ -77,8 +77,8 @@ public class CarrotMovement : MonoBehaviour {
             }
         }
 		if (other.tag == "Player1" || other.tag == "Player2") {
-			Rigidbody otherRB = other.transform.GetComponent<Rigidbody>();
-			Rigidbody thisRB = parentTransform.GetComponent<Rigidbody>();
+			Rigidbody otherRB = other.transform.GetComponent<Rigidbody> ();
+			Rigidbody thisRB = parentTransform.GetComponent<Rigidbody> ();
 
 			Vector3 dir = thisRB.velocity.normalized;
 			Vector3 knockbackDir = Vector3.zero;
@@ -103,7 +103,6 @@ public class CarrotMovement : MonoBehaviour {
 				Camera.main.GetComponent<CamShaking> ().cameraShake ();
 				shaken = true;
 			}
-
 		}
         
     }
@@ -124,4 +123,4 @@ public class CarrotMovement : MonoBehaviour {
         isFired = true;
         this.spawnPoint = this.transform;
     }
-		}
+}
