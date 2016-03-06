@@ -2000,9 +2000,11 @@ MonoBehaviour:
   blueMats:
   - {fileID: 2100000, guid: 0fed0ade65344d142a80393d3af45a20, type: 2}
   - {fileID: 2100000, guid: ec2c3e29fb79d0240bddd8b0b4f72054, type: 2}
+  - {fileID: 2100000, guid: c5dbc8beabc9de34a9479d5ae355e30c, type: 2}
   redMats:
   - {fileID: 2100000, guid: 0caffa2a6dbab074b85f03d93616993d, type: 2}
   - {fileID: 2100000, guid: 12d61f9306fb58d458504ead47aaea46, type: 2}
+  - {fileID: 2100000, guid: e77f9a51f376b814b90af60f3a0916dc, type: 2}
 --- !u!4 &1042737532
 Transform:
   m_ObjectHideFlags: 0

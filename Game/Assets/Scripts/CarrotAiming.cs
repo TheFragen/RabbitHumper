@@ -13,6 +13,7 @@ public class CarrotAiming : MonoBehaviour {
     public float fireWaitTime = 0;
 	private string playerString;
     XboxController controller;
+    Vector3 upFix = new Vector3(0, 1.2f, 0);
 
     // Use this for initialization
     void Start () {
@@ -37,7 +38,7 @@ public class CarrotAiming : MonoBehaviour {
 
 			//Show carrot when player holds down R2
 			if (XCI.GetButtonDown(XboxButton.RightBumper, controller) && spawnedCarrot == null && currentTime > lastFireTime) {
-				spawnedCarrot = Instantiate (carrot, this.transform.position, Quaternion.Euler (new Vector3 (10, 0, 0))) as Transform;
+				spawnedCarrot = Instantiate (carrot, this.transform.position + upFix, Quaternion.Euler (new Vector3 (10, 0, 0))) as Transform;
 				carrotRB = spawnedCarrot.GetComponent<Rigidbody> ();
                 spawnedCarrot.GetChild(0).GetComponent<BoxCollider>().enabled = false;
 			}
@@ -46,7 +47,7 @@ public class CarrotAiming : MonoBehaviour {
 			if (spawnedCarrot != null && XCI.GetButton(XboxButton.RightBumper, controller)) {
 				carrotRB.useGravity = false;
 				if (direction.magnitude == 0) {
-					spawnedCarrot.position = this.transform.position;
+					spawnedCarrot.position = this.transform.position + upFix;
 					if (lastDirection.magnitude > 0) {
 						carrotRB.MoveRotation (Quaternion.LookRotation (lastDirection));
 					} else {
@@ -54,7 +55,7 @@ public class CarrotAiming : MonoBehaviour {
 					}
 
 				} else {
-					spawnedCarrot.position = this.transform.position;
+					spawnedCarrot.position = this.transform.position + upFix;
 					carrotRB.MoveRotation (Quaternion.LookRotation (direction));
 					lastDirection = direction;
 				}

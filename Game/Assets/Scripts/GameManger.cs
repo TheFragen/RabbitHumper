@@ -10,8 +10,8 @@ public class GameManger : MonoBehaviour {
 	[HideInInspector] public int numbPlayers;
 	public List<GameObject> players = new List<GameObject>();
 	private int[] playerScores;
-    public Material[] blueMats = new Material[2];
-    public Material[] redMats = new Material[2];
+    public Material[] blueMats = new Material[3];
+    public Material[] redMats = new Material[3];
 	private bool gameOver = false;
 
 

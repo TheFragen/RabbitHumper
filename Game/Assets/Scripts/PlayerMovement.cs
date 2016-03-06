@@ -35,6 +35,7 @@ public class PlayerMovement : MonoBehaviour
         rb = this.GetComponent<Rigidbody>();
 
         distToGround = this.GetComponent<Collider>().bounds.extents.y;
+
     }
 
     // Update is called once per frame
@@ -142,6 +143,7 @@ public class PlayerMovement : MonoBehaviour
         Material[] _tmpA = this.transform.GetChild(0).Find("polySurface108").GetComponent<Renderer>().materials;
         _tmpA[2] = mats[0];
         _tmpA[3] = mats[1];
+        _tmpA[4] = mats[2];
         this.transform.GetChild(0).Find("polySurface108").GetComponent<Renderer>().materials = _tmpA;
 
         Material[] _tmpB = this.transform.GetChild(0).Find("polySurface117").GetComponent<Renderer>().materials;
