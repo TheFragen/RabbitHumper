@@ -6,7 +6,9 @@ public class ObjectiveSpawner : MonoBehaviour {
 	public static ObjectiveSpawner instance = null;
 
 	public GameObject objective;
-	public List<GameObject> spawnPoints = new List<GameObject>();
+    public GameObject objectiveJuice;
+
+    public List<GameObject> spawnPoints = new List<GameObject>();
 
 	public float minTime = 2.0f;
 	public float maxTime = 4.0f;
@@ -47,7 +49,8 @@ public class ObjectiveSpawner : MonoBehaviour {
 
 		if (index != lastIndex) {
 			Instantiate (objective, spawnPoints [index].transform.position, objective.transform.rotation);
-			lastIndex = index;
+            Instantiate(objectiveJuice, spawnPoints[index].transform.position, Quaternion.identity);
+            lastIndex = index;
 			objActive = true;
 		}
 	}

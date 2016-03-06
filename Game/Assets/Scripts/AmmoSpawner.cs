@@ -6,6 +6,7 @@ public class AmmoSpawner : MonoBehaviour {
 	public static AmmoSpawner instance = null;
 
 	public GameObject ammo;
+    public GameObject ammoJuice;
 	public List<GameObject> spawnPoints = new List<GameObject>();
 
 	public float minTime = 2.0f;
@@ -40,7 +41,8 @@ public class AmmoSpawner : MonoBehaviour {
 
 			if (index != lastIndex && spaceOccupied[index] == false) {
 				GameObject newAmmo = Instantiate (ammo, spawnPoints [index].transform.position, ammo.transform.rotation) as GameObject;
-				newAmmo.GetComponent<Ammo>().setIndex (index);
+                Instantiate(ammoJuice, spawnPoints[index].transform.position, Quaternion.identity);
+                newAmmo.GetComponent<Ammo>().setIndex (index);
 				spaceOccupied [index] = true;
 				lastIndex = index;
 				startTime = Time.time;
