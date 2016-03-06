@@ -10,9 +10,11 @@ public class GameManger : MonoBehaviour {
 	[HideInInspector] public int numbPlayers;
 	public List<GameObject> players = new List<GameObject>();
 	private int[] playerScores;
+    public Material[] blueMats = new Material[2];
+    public Material[] redMats = new Material[2];
 
 
-	void Awake(){
+    void Awake(){
 		//Makes the manager a singleton which persists through scenes
 		if (instance == null)
 			instance = this;
@@ -58,6 +60,15 @@ public class GameManger : MonoBehaviour {
 			GameObject prev = spawnPoints [index];
 			spawnPoints.Remove (prev);
 			player.GetComponent<PlayerMovement> ().setPlayerNumb (i + 1);
-		}
+            Debug.Log(i);
+            if (i < 1) //Blue
+            {
+                player.GetComponent<PlayerMovement>().setPlayerColor(blueMats);
+            }
+            else //Red
+            {
+                player.GetComponent<PlayerMovement>().setPlayerColor(redMats);
+            }
+        }
 	}
 }

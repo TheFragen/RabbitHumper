@@ -137,4 +137,21 @@ public class PlayerMovement : MonoBehaviour
         playerNumber = i;
     }
 
+    public void setPlayerColor(Material[] mats)
+    {
+        Debug.Log(transform.GetChild(0).Find("polySurface108").GetComponent<Renderer>().material);
+        Material[] _tmpA = this.transform.GetChild(0).Find("polySurface108").GetComponent<Renderer>().materials;
+        _tmpA[2] = mats[0];
+        _tmpA[3] = mats[1];
+        this.transform.GetChild(0).Find("polySurface108").GetComponent<Renderer>().materials = _tmpA;
+
+        Material[] _tmpB = this.transform.GetChild(0).Find("polySurface117").GetComponent<Renderer>().materials;
+        _tmpB[1] = mats[1];
+        this.transform.GetChild(0).Find("polySurface117").GetComponent<Renderer>().materials = _tmpB;
+
+        Material[] _tmpC = this.transform.GetChild(0).Find("polySurface119").GetComponent<Renderer>().materials;
+        _tmpC[1] = mats[1];
+        this.transform.GetChild(0).Find("polySurface119").GetComponent<Renderer>().materials = _tmpC;
+    }
+
 }

@@ -9,7 +9,7 @@ public class Kid : MonoBehaviour {
 
 	private float startTime;
 	private float distToGround;
-
+    public AudioClip[] bounceSounds = new AudioClip[5];
 
 	void Start(){
 		distToGround = this.GetComponent<Collider>().bounds.extents.y;
@@ -27,7 +27,11 @@ public class Kid : MonoBehaviour {
 	}
 
 	void jump(){
-		jumpDir = Random.insideUnitSphere;
+        if(Random.Range(0,2) > 0)
+        {
+            this.GetComponent<AudioSource>().PlayOneShot(bounceSounds[Random.Range(0, bounceSounds.Length)]);
+        }
+        jumpDir = Random.insideUnitSphere;
 		if (jumpDir.y < 0.0f) {
 			jumpDir.y *= -1;
 		}
