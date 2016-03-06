@@ -15,7 +15,6 @@ public class camWin : MonoBehaviour {
 	private Vector3 playerPos;
 	private Vector3 finalPos;
 	private GameObject winner;
-	private Vector3 offset = new Vector3(0.0f,0.5f,0.0f);
 
 	void Start(){
 		camPos = Camera.main.transform.position;
@@ -39,13 +38,9 @@ public class camWin : MonoBehaviour {
 				float t = (Time.time - startTimer) / zoomDur;
 				Debug.Log ("MOVECAMERA");
 				if (t < 1.0f) {
-					Vector3 movement = Vector3.Lerp (camPos, winner.transform.position+offset, t);
-					if (Vector3.Distance (movement, winner.transform.position+offset) > dist) {
-						Camera.main.transform.position = movement;
+					Camera.main.transform.position = Vector3.Lerp (camPos, winner.transform.position+ new Vector3(dist,0.0f,0.0f), t);
 					} else {
-						finalPos = Camera.main.transform.position-winner.transform.position;
-					}
-				} else {
+					finalPos = Camera.main.transform.position-winner.transform.position;
 					Camera.main.transform.position = winner.transform.position + finalPos;
 				}
 			}
