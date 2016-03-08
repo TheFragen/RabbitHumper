@@ -27,7 +27,7 @@ public class Kid : MonoBehaviour {
 	}
 
 	void jump(){
-        if(Random.Range(0,2) > 0)
+        if(Random.Range(0,10) >= 8)
         {
             this.GetComponent<AudioSource>().PlayOneShot(bounceSounds[Random.Range(0, bounceSounds.Length)]);
         }

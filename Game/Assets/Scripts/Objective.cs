@@ -139,7 +139,7 @@ public class Objective : MonoBehaviour {
 		if (other.CompareTag ("Player2")) {
 			player2Active = false;
 			player2Using = false;
-            player1.transform.GetChild(0).GetComponent<Animator>().SetBool("isHumping", false);
+            player2.transform.GetChild(0).GetComponent<Animator>().SetBool("isHumping", false);
         }
 	}
 
@@ -148,7 +148,8 @@ public class Objective : MonoBehaviour {
         {
             player1.transform.GetChild(0).GetComponent<Animator>().SetBool("isHumping", false);
         }
-        else if(player2 != null)
+
+        if (player2 != null)
         {
             player2.transform.GetChild(0).GetComponent<Animator>().SetBool("isHumping", false);
         }

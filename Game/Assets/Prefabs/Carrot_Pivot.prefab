@@ -413,12 +413,12 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.05
+  m_Volume: 0.8
   m_Pitch: 1
   Loop: 0
   Mute: 0
   Spatialize: 0
-  Priority: 128
+  Priority: 126
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500
@@ -511,6 +511,7 @@ MonoBehaviour:
   carrotAtCarrot:
   - {fileID: 8300000, guid: af45e746ffb32e949b41b7bdaaac4fbc, type: 3}
   - {fileID: 8300000, guid: e5a8f4da36cf3ef4eb535edee9a1e2ee, type: 3}
+  duration: 5
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
