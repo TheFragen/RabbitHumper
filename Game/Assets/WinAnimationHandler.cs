@@ -28,16 +28,16 @@ public class WinAnimationHandler : MonoBehaviour {
             {
                 if (wonPlayer.GetComponent<PlayerMovement>().playerNumber == 1) //Blue
                 {
-                    BlueWinsGUI.SetActive(true);
-                    StartCoroutine(showStar(1.1f));
+                 //   BlueWinsGUI.SetActive(true);
+                //    StartCoroutine(showStar(1.1f));
                     WinText.SetActive(true);
                     WinText.GetComponent<Text>().text = "Blue wins!";
                     InstructionsText.SetActive(true);
                 }
                 else
                 {
-                    RedWinsGUI.SetActive(true);
-                    StartCoroutine(showStar(1.1f));
+               //     RedWinsGUI.SetActive(true);
+              //      StartCoroutine(showStar(1.1f));
                     WinText.SetActive(true);
                     WinText.GetComponent<Text>().text = "Red wins!";
                     InstructionsText.SetActive(true);

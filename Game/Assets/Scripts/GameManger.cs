@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 public class GameManger : MonoBehaviour {
 	public static GameManger instance = null;
@@ -12,6 +13,9 @@ public class GameManger : MonoBehaviour {
 	private int[] playerScores;
     public Material[] blueMats = new Material[3];
     public Material[] redMats = new Material[3];
+ //   public bool soundEnabled = true;
+    public bool musicEnabled = true;
+
 	private bool gameOver = false;
 
 
@@ -23,6 +27,7 @@ public class GameManger : MonoBehaviour {
 			Destroy (gameObject);
         numbPlayers = players.Count;
 		gameOver = false;
+        musicEnabled = true;
     }
 
 	// Use this for initialization
@@ -80,4 +85,45 @@ public class GameManger : MonoBehaviour {
             }
         }
 	}
+
+    void OnGUI()
+    {
+        Event e = Event.current;
+
+        //Toggle music - SHIFT + M
+        if (e.type == EventType.KeyDown && e.shift && e.keyCode == KeyCode.M)
+        {
+            musicEnabled = !musicEnabled;
+            string toggleString = (musicEnabled) ? "enabled" : "disabled";
+            GameObject.Find("MusicPlayer").GetComponent<AudioSource>().enabled = musicEnabled;
+            showStatusText("Music " + toggleString + ".");
+        }
+
+    /*    //Toggle sound - SHIFT + S
+        if (e.type == EventType.KeyDown && e.shift && e.keyCode == KeyCode.S)
+        {
+            string toggleString = (soundEnabled) ? "enabled" : "disabled";
+            showStatusText("Sound " + toggleString + ".");
+        }*/
+
+
+    }
+
+    void showStatusText(string input)
+    {
+        Transform textGO = GameObject.Find("statusText").transform;
+        
+        Text statusText = textGO.GetComponent<Text>();
+        statusText.text = input;
+        statusText.enabled = true;
+
+        StartCoroutine(waitAndDisable(2, textGO));
+    }
+
+
+    IEnumerator waitAndDisable(float waitTime, Transform reference)
+    {
+        yield return new WaitForSeconds(waitTime);
+        reference.GetComponent<Text>().enabled = false;
+    }
 }
